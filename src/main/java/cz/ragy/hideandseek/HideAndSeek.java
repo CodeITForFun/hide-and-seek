@@ -7,7 +7,7 @@ public final class HideAndSeek extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        new StartupManager().startup(getServer());
+        new StartupManager().startup(getServer(), this);
     }
 
     @Override
