@@ -1,10 +1,10 @@
-# hide-and-seek
+# Hide and Seek Plgin by Ragy
 Basic and simple minecraft hide and seek plugin
 
 # Commands
  /has **-** Main command for Hide And Seek Plugin, shows Help Menu
  <br>/has help **-** shows Help Menu
- <br>/has createarena [name] [world] ... **-** Creats a new has arena
+ <br>/has createarena [name] [world] ... **-** Creates a new arena
 
 
 # TODO
