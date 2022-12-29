@@ -1,11 +1,11 @@
 # Hide and Seek - Plugin by Ragy 🟠
 Basic and simple minecraft hide and seek plugin
 
-  |---------------------------------|
+  |--------------------------------|
   | 🟠 = Plugin is in beta         |
   | 🟢 = Plugin is supported       |
   | 🔴 = Plugin is not supported   |
-  |---------------------------------|
+  |--------------------------------|
   
 <hr>
 
