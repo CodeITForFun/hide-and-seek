@@ -17,6 +17,8 @@ Basic and simple minecraft hide and seek plugin
   |     1.18x        🟠      |
   |     1.19x        🟠      |
   |     1.19.3       🟠      |
+  |---------------------------|
+  <hr>
   |---------------------------------|
   | 🟠 = Version is in beta        |
   | 🟢 = Version is supported      |
