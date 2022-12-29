@@ -1,4 +1,4 @@
-# Hide and Seek Plgin by Ragy
+# Hide and Seek Plugin by Ragy
 Basic and simple minecraft hide and seek plugin
 
 # Commands
