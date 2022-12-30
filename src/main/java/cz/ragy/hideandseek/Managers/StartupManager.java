@@ -8,9 +8,9 @@ import java.util.Arrays;
 public class StartupManager {
     public void startup(Server server, Plugin plugin){
         String devs = Arrays.asList(plugin.getDescription().getAuthors()).toString()
-                .replace(",", "")  //remove the commas
-                .replace("[", "")  //remove the right bracket
-                .replace("]", "")  //remove the left bracket
+                .replace(",", "")
+                .replace("[", "")
+                .replace("]", "")
                 .trim();
         server.getLogger().info("\n\n\n" +
                 "\n" +
