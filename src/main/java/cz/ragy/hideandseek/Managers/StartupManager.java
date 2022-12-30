@@ -16,6 +16,28 @@ public class StartupManager {
                 .replace("[", "")
                 .replace("]", "")
                 .trim();
+
+
+        server.getLogger().info("Loading config files...");
+        new ConfigManager().startup();
+
+        server.getLogger().info("Loading commands...");
+        instance.getCommand("has").setExecutor(new MainCommand());
+
+        server.getLogger().info("Loading events...");
+        for(Class<?> clazz : new Reflections("cz.ragy.hideandseek.Listeners")
+                .getSubTypesOf(Listener.class)) {
+            try {
+                Listener listener = (Listener) clazz
+                        .getDeclaredConstructor()
+                        .newInstance();
+                server.getPluginManager().registerEvents(listener, plugin);
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
         server.getLogger().info("\n\n\n" +
                 "\n" +
                 "  _    _ _     _                         _  _____           _    \n" +
@@ -31,19 +53,6 @@ public class StartupManager {
                 " -> Developers: " + devs +
                 "\n" +
                 "\n\n\n");
-        //TODO: Load events, arena managers, commands
-        for(Class<?> clazz : new Reflections("cz.ragy.hideandseek.Listeners")
-                .getSubTypesOf(Listener.class)) {
-            try {
-                Listener listener = (Listener) clazz
-                        .getDeclaredConstructor()
-                        .newInstance();
-                server.getPluginManager().registerEvents(listener, plugin);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
-            {
-                e.printStackTrace();
-            }
-        }
-        instance.getCommand("has").setExecutor(new MainCommand());
+        //TODO: arena managers
     }
 }
