@@ -14,10 +14,19 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
-            switch(command.getName()){
-                case "has":
-                    sender.sendMessage("It works!");
-                    break;
+            if(args.length == 0) {
+                switch (command.getName()) {
+                    case "has":
+                        sender.sendMessage("It works!");
+                        break;
+                }
+            }
+            if(args.length > 1){
+                switch (args[0]) {
+                    case "help":
+                        sender.sendMessage("pOMOC JE NA CESTE");
+                        break;
+                }
             }
             return true;
         } else {
@@ -29,8 +38,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
             List<String> arguments = new ArrayList<>();
-            arguments.add("Yourmum");
-            arguments.add("mjiumisjmijmjm");
+            arguments.add("help");
+            arguments.add("createarena");
             return arguments;
     }
 }

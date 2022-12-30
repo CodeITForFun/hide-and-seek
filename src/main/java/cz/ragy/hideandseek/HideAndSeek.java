@@ -4,11 +4,9 @@ import cz.ragy.hideandseek.Managers.StartupManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class HideAndSeek extends JavaPlugin {
-    public static HideAndSeek instance;
-
     @Override
     public void onEnable() {
-        new StartupManager().startup(getServer(), this, instance);
+        new StartupManager().startup(getServer(), this, this);
     }
 
     @Override
