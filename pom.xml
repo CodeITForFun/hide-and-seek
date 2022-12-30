@@ -71,5 +71,10 @@
             <version>1.19.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections-spring</artifactId>
+            <version>0.9.9-RC1</version>
+        </dependency>
     </dependencies>
 </project>
