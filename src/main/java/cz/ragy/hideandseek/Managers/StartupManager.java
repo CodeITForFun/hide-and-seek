@@ -24,6 +24,9 @@ public class StartupManager {
                 "                                                                 \n" +
                 " -> Successfully enabled " + plugin.getName() + "\n" +
                 " -> Version: " + plugin.getDescription().getVersion() + "\n" +
-                " -> Developers: " + devs + "\n\n\n");
+                " -> Developers: " + devs +
+                "\n" +
+                "\n\n\n");
+        //TODO: Load events, arena managers, commands
     }
 }
