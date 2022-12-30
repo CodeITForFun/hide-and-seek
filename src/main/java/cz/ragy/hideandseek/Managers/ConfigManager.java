@@ -3,6 +3,7 @@ package cz.ragy.hideandseek.Managers;
 import cz.ragy.hideandseek.Game.Arena;
 import cz.ragy.hideandseek.HideAndSeek;
 import org.bukkit.Server;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -29,12 +30,13 @@ public class ConfigManager {
     }
     public void saveArenas(List<Arena> arenaList){
         arenas = new YamlConfiguration();
-        FileConfiguration arenaConfig = YamlConfiguration.loadConfiguration(arenasFile);
-        arenaConfig.getConfigurationSection("items").set
-        arenaList.forEach(arena -> arenaConfig.set("arenas", arena));
+        FileConfiguration arenacfg = YamlConfiguration.loadConfiguration(arenasFile);
+        //FileConfiguration arenaConfig = YamlConfiguration.loadConfiguration(arenasFile);
+        ConfigurationSection settings = arenacfg.getConfigurationSection("arenas");
+        arenaList.forEach(arena -> settings.addDefault(arena.arenaName, arena));
 
         try {
-            arenaConfig.save(arenasFile);
+            arenas.save(arenasFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
