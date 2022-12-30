@@ -10,10 +10,10 @@ public class Arena {
     public int minPlayers;
     public int seekersCount;
     public int hidersCount;
-    public List<Player> arenaPlayers;
+    private List<Player> arenaPlayers;
     public String arenaName;
     public String arenaWorldName;
-    public boolean playing;
+    private boolean playing;
 
     public Arena(Integer maxPlayers, Integer minPlayers, Integer seekersCount, Integer hidersCount, String arenaName, String arenaWorldName){
         this.maxPlayers = maxPlayers;
