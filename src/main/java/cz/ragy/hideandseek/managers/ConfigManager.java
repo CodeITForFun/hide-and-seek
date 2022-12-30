@@ -1,12 +1,10 @@
-package cz.ragy.hideandseek.Managers;
+package cz.ragy.hideandseek.managers;
 
-import cz.ragy.hideandseek.Game.Arena;
+import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.HideAndSeek;
-import org.bukkit.Server;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;

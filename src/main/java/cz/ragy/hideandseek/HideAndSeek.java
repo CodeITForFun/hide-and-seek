@@ -1,6 +1,6 @@
 package cz.ragy.hideandseek;
 
-import cz.ragy.hideandseek.Managers.StartupManager;
+import cz.ragy.hideandseek.managers.StartupManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class HideAndSeek extends JavaPlugin {

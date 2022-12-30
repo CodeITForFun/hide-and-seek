@@ -1,4 +1,4 @@
-package cz.ragy.hideandseek.Listeners;
+package cz.ragy.hideandseek.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -1,6 +1,6 @@
-package cz.ragy.hideandseek.Managers;
+package cz.ragy.hideandseek.managers;
 
-import cz.ragy.hideandseek.Commands.MainCommand;
+import cz.ragy.hideandseek.commands.MainCommand;
 import cz.ragy.hideandseek.HideAndSeek;
 import org.bukkit.Server;
 import org.bukkit.event.Listener;
@@ -25,7 +25,7 @@ public class StartupManager {
         instance.getCommand("has").setExecutor(new MainCommand());
 
         server.getLogger().info("Loading events...");
-        for(Class<?> clazz : new Reflections("cz.ragy.hideandseek.Listeners")
+        for(Class<?> clazz : new Reflections("cz.ragy.hideandseek.listeners")
                 .getSubTypesOf(Listener.class)) {
             try {
                 Listener listener = (Listener) clazz

@@ -1,27 +1,26 @@
-package cz.ragy.hideandseek.Game;
+package cz.ragy.hideandseek.game;
 
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
 public class Arena {
+    public String arenaName;
+    public String arenaWorldName;
     public int maxPlayers;
     public int minPlayers;
     public int seekersCount;
     public int hidersCount;
     private List<Player> arenaPlayers;
-    public String arenaName;
-    public String arenaWorldName;
     private boolean playing;
 
-    public Arena(Integer maxPlayers, Integer minPlayers, Integer seekersCount, Integer hidersCount, String arenaName, String arenaWorldName){
+    public Arena(String arenaName, String arenaWorldName, Integer maxPlayers, Integer minPlayers, Integer seekersCount, Integer hidersCount){
+        this.arenaName = arenaName;
+        this.arenaWorldName = arenaWorldName;
         this.maxPlayers = maxPlayers;
         this.minPlayers = minPlayers;
         this.seekersCount = seekersCount;
         this.hidersCount = hidersCount;
-        this.arenaName = arenaName;
-        this.arenaWorldName = arenaWorldName;
     }
     public void removeArenaPlayer(Player player){
         this.arenaPlayers.remove(player);

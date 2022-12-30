@@ -1,0 +1,27 @@
+########################################################################
+#                                                                      #
+#                 The Ultimate Hide And Seek Plugin                    #
+#                                                                      #
+########################################################################
+#                                                                      #
+# By using this plugin, you automatically accepting Minecraft EULA!    #
+# If you have any problem, you can ask on our Discord for Support in   #
+# channel #📃┃help or by forum channel called #📈┃support. If you      #
+# found any bug, please report it. It'll help you and for our plugin!  #
+#                                                                      #
+########################################################################
+#          Created by: Radekminecraft    and    FungY911               #
+########################################################################
+
+
+Core:
+  No-Permission: "pico L nemas prava"
+  Prefix: "Hide And Seek "
+  notEntity: "chod na server"
+
+
+Create-Arena:
+  Invalid-Message: "Error! use command like this: /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount] [hidersCount]"
+  Creating-Arena: "Please wait, alredy creating arena!"
+
+

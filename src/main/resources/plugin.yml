@@ -2,7 +2,7 @@ name: HideAndSeek
 version: '${project.version}'
 main: cz.ragy.hideandseek.HideAndSeek
 api-version: 1.19
-authors: [ Radekminecraft, Fungy ]
+authors: [ Radekminecraft, FungY911 ]
 description: Basic and simple hide and seek plugin from Ragy dev crew
 commands:
   has:

@@ -1,4 +1,4 @@
-package cz.ragy.hideandseek.Utilities;
+package cz.ragy.hideandseek.utilities;
 
 public class Digit {
     public boolean containsDigits(String StringInput) {

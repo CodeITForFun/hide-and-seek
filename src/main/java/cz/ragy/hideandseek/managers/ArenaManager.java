@@ -1,6 +1,6 @@
-package cz.ragy.hideandseek.Managers;
+package cz.ragy.hideandseek.managers;
 
-import cz.ragy.hideandseek.Game.Arena;
+import cz.ragy.hideandseek.game.Arena;
 
 import java.util.ArrayList;
 import java.util.List;
