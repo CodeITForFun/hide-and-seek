@@ -21,7 +21,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         break;
                 }
             }
-            if(args.length > 1){
+            if(args.length == 1){
                 switch (args[0]) {
                     case "help":
                         sender.sendMessage("pOMOC JE NA CESTE");
