@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
-
     public File file = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
     public FileConfiguration config = YamlConfiguration.loadConfiguration(file);
     public String prefix = (String) config.get("Core.Prefix");
@@ -58,9 +57,12 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 switch(args[0]) {
                     case "createarena":
                         if (!player.hasPermission("has.createarena")) { sender.sendMessage(noPerms); return true; }
-                        //    /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]
                         Digit digit = new Digit();
-                        if(!(digit.containsDigits(args[1])) && !(digit.containsDigits(args[2])) && digit.containsDigits(args[3]) && digit.containsDigits(args[4]) && digit.containsDigits(args[5])){
+                        if( !(digit.containsDigits(args[1])) &&
+                            !(digit.containsDigits(args[2])) &&
+                            digit.containsDigits(args[3]) &&
+                            digit.containsDigits(args[4]) &&
+                            digit.containsDigits(args[5])){
 
                             String arenaName = args[1];
                             String arenaWorldName = args[2];

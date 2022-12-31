@@ -25,6 +25,7 @@ public class StartupManager {
         instance.getCommand("has").setExecutor(new MainCommand());
 
         server.getLogger().info("Loading events...");
+
         for(Class<?> clazz : new Reflections("cz.ragy.hideandseek.listeners")
                 .getSubTypesOf(Listener.class)) {
             try {
@@ -53,6 +54,5 @@ public class StartupManager {
                 " -> Developers: " + devs +
                 "\n" +
                 "\n\n\n");
-        //TODO: arena managers
     }
 }
