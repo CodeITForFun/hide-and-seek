@@ -2,7 +2,6 @@ package cz.ragy.hideandseek.managers;
 
 import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.HideAndSeek;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;

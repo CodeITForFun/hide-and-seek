@@ -57,7 +57,6 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 switch(args[0]) {
                     case "createarena":
                         if (!player.hasPermission("has.createarena") || sender.hasPermission("has.*")) { sender.sendMessage(noPerms); return true; }
-                        //    /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]
                         if (!player.hasPermission("has.createarena")) { sender.sendMessage(noPerms); return true; }
                         Digit digit = new Digit();
                         if( !(digit.containsDigits(args[1])) &&
