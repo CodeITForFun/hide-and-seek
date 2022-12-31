@@ -19,8 +19,4 @@ public final class HideAndSeek extends JavaPlugin {
     @Override
     public void onDisable() {
     }
-
-    public void print(String s) {
-        getLogger().info(s);
-    }
 }

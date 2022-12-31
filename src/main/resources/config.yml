@@ -24,6 +24,7 @@ Create-Arena:
   Invalid-Message: "Error! use command like this: /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]"
   Created: "Your arena has been successfully created as %arena%!" # Use %arena% for show arena name
   Creating-Arena: "Please wait, alredy creating arena!"
+  Arena-Exists: "Error! Arena you created already exists!"
 
 Database:
   # Type of database to use (options: MySQL, SQLite, Default: SQLite)

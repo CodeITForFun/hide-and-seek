@@ -24,8 +24,6 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public String noPerms = (String) config.get("Core.No-Permission");
     public String invalidMessage = (String) config.get("Create-Arena.Invalid-Message");
     public String notEntity = (String) config.get("Core.notEntity");
-    public String creating = (String) config.get("Create-Arena.Creating-Arena");
-    public String arenaCreated = (String) config.get("Create-Arena.Created");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -43,6 +41,17 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                     case "help":
                         sender.sendMessage("pOMOC JE NA CESTE");
                         break;
+                    case "reload":
+                        if (!sender.hasPermission("has.reload")) {
+                            sender.sendMessage(prefix + noPerms);
+                        }
+                        sender.sendMessage(prefix + "Please wait, reloading plugin!");
+                        HideAndSeek.instance.reloadConfig();
+                        sender.sendMessage(prefix + "Files arenas.yml, config.yml has beed reloaded!");
+                        break;
+                    case "createarena":
+                        sender.sendMessage(prefix + invalidMessage);
+                        break;
                 }
             }
             if (args.length > 1 && args.length == 6) {
@@ -52,7 +61,6 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         //    /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]
                         Digit digit = new Digit();
                         if(!(digit.containsDigits(args[1])) && !(digit.containsDigits(args[2])) && digit.containsDigits(args[3]) && digit.containsDigits(args[4]) && digit.containsDigits(args[5])){
-                            sender.sendMessage(creating);
 
                             String arenaName = args[1];
                             String arenaWorldName = args[2];
@@ -61,35 +69,17 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                             int seekersCount = Integer.parseInt(args[5]);
 
                             Arena createdArena = new Arena(arenaName, arenaWorldName, maxPlayers, minPlayers, seekersCount);
-
-                            sender.sendMessage("Arena: " + arenaName);
-                            sender.sendMessage("World: " + arenaWorldName);
-                            sender.sendMessage("Max Players: " + maxPlayers);
-                            sender.sendMessage("Min Players: " + minPlayers);
-                            sender.sendMessage("Seekers: " + seekersCount);
                             ArenaManager arenaManager = new ArenaManager();
-                            arenaManager.addArenaToList(createdArena);
-
-                            String setArena = arenaCreated;
-                            setArena = setArena.replace("%arena%", arenaName);
-
-                            sender.sendMessage(setArena);
-
+                            arenaManager.addArenaToList(createdArena, sender);
                         } else {
                             sender.sendMessage(prefix + invalidMessage);
                         }
                         break;
-                    case "reload":
-                        if (!sender.hasPermission("has.reload")) {
-                            sender.sendMessage(prefix + invalidMessage);
-                        }
-                        sender.sendMessage(prefix + "Please wait, reloading plugin!");
-                        HideAndSeek.instance.reloadConfig();
-                        sender.sendMessage(prefix + "Files arenas.yml, config.yml has beed reloaded!");
-                        return true;
                 }
-            } else {
+            }
+            if(args.length > 6 && args[0] == "createarena") {
                 sender.sendMessage(prefix + invalidMessage);
+                return true;
             }
             return true;
         } else {
@@ -103,7 +93,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             List<String> arguments = new ArrayList<>();
             arguments.add("help");
             if (sender.hasPermission("has.tab")) {
-                arguments.add("relaod");
+                arguments.add("reload");
                 arguments.add("createarena");
             }
             return arguments;
