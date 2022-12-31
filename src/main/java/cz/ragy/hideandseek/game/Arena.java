@@ -14,13 +14,13 @@ public class Arena {
     private List<Player> arenaPlayers;
     private boolean playing;
 
-    public Arena(String arenaName, String arenaWorldName, Integer maxPlayers, Integer minPlayers, Integer seekersCount, Integer hidersCount){
+    public Arena(String arenaName, String arenaWorldName, Integer maxPlayers, Integer minPlayers, Integer seekersCount){
         this.arenaName = arenaName;
         this.arenaWorldName = arenaWorldName;
         this.maxPlayers = maxPlayers;
         this.minPlayers = minPlayers;
         this.seekersCount = seekersCount;
-        this.hidersCount = hidersCount;
+        this.hidersCount = hidersCount; 
     }
     public void removeArenaPlayer(Player player){
         this.arenaPlayers.remove(player);

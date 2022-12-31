@@ -58,7 +58,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
 
                         //    /has createarena args1 args2 args3 args4 args5 args6
                         Digit digit = new Digit();
-                        if(digit.containsDigits(args[1]) && digit.containsDigits(args[2]) && digit.containsDigits(args[3]) && digit.containsDigits(args[4]) && !(digit.containsDigits(args[5]) && !(digit.containsDigits(args[6])))){
+                        if(digit.containsDigits(args[1]) && digit.containsDigits(args[2]) && digit.containsDigits(args[3]) && digit.containsDigits(args[4]) && !(digit.containsDigits(args[5]))){
                             sender.sendMessage(creating);
                             String arenaName = args[1];
                             String arenaWorldName = args[2];
@@ -66,16 +66,13 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                             int minPlayers = Integer.parseInt(args[4]);
                             int seekersCount = Integer.parseInt(args[5]);
 
-                            int hidersCount = maxPlayers - seekersCount;
-
-                            Arena createdArena = new Arena(arenaName, arenaWorldName, maxPlayers, minPlayers, seekersCount, hidersCount);
+                            Arena createdArena = new Arena(arenaName, arenaWorldName, maxPlayers, minPlayers, seekersCount);
 
                             sender.sendMessage("Arena: " + arenaName);
                             sender.sendMessage("World: " + arenaWorldName);
                             sender.sendMessage("Max Players: " + maxPlayers);
                             sender.sendMessage("Min Players: " + minPlayers);
                             sender.sendMessage("Seekers: " + seekersCount);
-                            sender.sendMessage("Hiders: " + hidersCount);
                             ArenaManager arenaManager = new ArenaManager();
                             arenaManager.addArenaToList(createdArena);
 
@@ -85,10 +82,12 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         }
                         break;
                     case "reload":
-                        //TODO: RELOAD FUNGY
                         if (!sender.hasPermission("has.reload")) {
                             sender.sendMessage(prefix + invalidMessage);
                         }
+                        sender.sendMessage(prefix + "Please wait, reloading plugin!");
+                        HideAndSeek.instance.reloadConfig();
+                        sender.sendMessage(prefix + "Files arenas.yml, config.yml has beed reloaded!");
                         return true;
                 }
             } else {
