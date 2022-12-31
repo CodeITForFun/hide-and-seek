@@ -75,15 +75,6 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                             sender.sendMessage(prefix + invalidMessage);
                         }
                         break;
-
-                    case "reload":
-                        if (!sender.hasPermission("has.reload")) {
-                            sender.sendMessage(prefix + noPerms);
-                        }
-                        sender.sendMessage(prefix + "Please wait, reloading plugin!");
-                        HideAndSeek.instance.reloadConfig();
-                        sender.sendMessage(prefix + "Files arenas.yml, config.yml has beed reloaded!");
-                        return true;
                 }
             }
             if(args.length > 6 && args[0] == "createarena") {

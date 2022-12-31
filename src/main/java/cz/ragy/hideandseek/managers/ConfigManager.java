@@ -66,27 +66,6 @@ public class ConfigManager {
                 sender.sendMessage("Max Players: " + arena.maxPlayers);
                 sender.sendMessage("Min Players: " + arena.minPlayers);
                 sender.sendMessage("Seekers: " + arena.seekersCount);
-
-
-            /*if (parentSection.getConfigurationSection(arena.arenaName) != null) {
-
-                HideAndSeek.instance.print("Arena is alredy existing!");
-                break; //stopuje for loop
-            }*/
-
-
-
-
-
-
-
-
-
-            childSection.set("ArenaWorld", arena.arenaWorldName);
-            childSection.set("ArenaMaxPlayers", arena.maxPlayers);
-            childSection.set("ArenaMinPlayers", arena.minPlayers);
-            childSection.set("ArenaSeekersCount", arena.seekersCount);
-
                 sender.sendMessage(creating);
                 sender.sendMessage(setArena);
             } else {
