@@ -20,7 +20,7 @@ public class Arena {
         this.maxPlayers = maxPlayers;
         this.minPlayers = minPlayers;
         this.seekersCount = seekersCount;
-        this.hidersCount = hidersCount; 
+        this.hidersCount = hidersCount;
     }
     public void removeArenaPlayer(Player player){
         this.arenaPlayers.remove(player);
