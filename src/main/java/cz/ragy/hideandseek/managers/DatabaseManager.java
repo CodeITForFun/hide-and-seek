@@ -18,7 +18,6 @@ public class DatabaseManager {
     public String database = (String) config.get("Database.database");
     public String username = (String) config.get("Database.username");
     public String password = (String) config.get("Database.password");
-
     public static Connection connection;
     public void DatabaseManager() {
 
