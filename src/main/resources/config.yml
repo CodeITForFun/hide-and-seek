@@ -28,6 +28,7 @@ Database:
   #MySQL, SQLite, Default: SQLite
   Type: MySQL
   host: "localhost"
+  port: ""
   username: "root"
   database: "test"
   password: ""
