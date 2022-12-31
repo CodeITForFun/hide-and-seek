@@ -24,6 +24,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public String noPerms = (String) config.get("Core.No-Permission");
     public String invalidMessage = (String) config.get("Create-Arena.Invalid-Message");
     public String notEntity = (String) config.get("Core.notEntity");
+    public String Reload = (String) config.get("Reload.Reload-Message");
+    public String sucReloaded = (String) config.get("Reload.Successfully-Reloaded");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -42,12 +44,10 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         sender.sendMessage("pOMOC JE NA CESTE");
                         break;
                     case "reload":
-                        if (!sender.hasPermission("has.reload")) {
-                            sender.sendMessage(prefix + noPerms);
-                        }
-                        sender.sendMessage(prefix + "Please wait, reloading plugin!");
+                        if (!sender.hasPermission("has.reload") || sender.hasPermission("has.*")) { sender.sendMessage(prefix + noPerms); }
+                        sender.sendMessage(prefix + Reload);
                         HideAndSeek.instance.reloadConfig();
-                        sender.sendMessage(prefix + "Files arenas.yml, config.yml has beed reloaded!");
+                        sender.sendMessage(prefix + sucReloaded);
                         break;
                     case "createarena":
                         sender.sendMessage(prefix + invalidMessage);
@@ -57,7 +57,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             if (args.length > 1 && args.length == 6) {
                 switch(args[0]) {
                     case "createarena":
-                        if (!player.hasPermission("has.createarena")) { sender.sendMessage(noPerms); return true; }
+                        if (!player.hasPermission("has.createarena") || sender.hasPermission("has.*")) { sender.sendMessage(noPerms); return true; }
                         //    /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]
                         Digit digit = new Digit();
                         if(!(digit.containsDigits(args[1])) && !(digit.containsDigits(args[2])) && digit.containsDigits(args[3]) && digit.containsDigits(args[4]) && digit.containsDigits(args[5])){
@@ -77,22 +77,16 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         break;
                 }
             }
-            if(args.length > 6 && args[0] == "createarena") {
-                sender.sendMessage(prefix + invalidMessage);
-                return true;
-            }
+            if(args.length > 6 && args[0] == "createarena") { sender.sendMessage(prefix + invalidMessage); return true; }
             return true;
-        } else {
-            sender.sendMessage(notEntity);
-            return true;
-        }
+        } else { sender.sendMessage(notEntity); return true; }
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
             List<String> arguments = new ArrayList<>();
             arguments.add("help");
-            if (sender.hasPermission("has.tab")) {
+            if (sender.hasPermission("has.tab") || sender.hasPermission("has.*")) {
                 arguments.add("reload");
                 arguments.add("createarena");
             }
