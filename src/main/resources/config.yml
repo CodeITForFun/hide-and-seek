@@ -24,4 +24,10 @@ Create-Arena:
   Invalid-Message: "Error! use command like this: /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount] [hidersCount]"
   Creating-Arena: "Please wait, alredy creating arena!"
 
-
+Database:
+  #MySQL, SQLite, Default: SQLite
+  Type: MySQL
+  host: "localhost"
+  username: "root"
+  database: "test"
+  password: ""
