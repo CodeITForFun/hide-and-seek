@@ -3,14 +3,14 @@ package cz.ragy.hideandseek.mysql;
 import java.sql.*;
 
 public class Execute {
-        private static Connection conn;
+        private static Connection connection;
 
         public Execute(Connection connection) {
-            this.conn = connection;
+            this.connection = connection;
         }
 
         public void executeDropDatabase() throws SQLException {
-            Statement statement = conn.createStatement();
+            Statement statement = connection.createStatement();
             statement.executeUpdate("DROP DATABASE yourmom;");
         }
 }
