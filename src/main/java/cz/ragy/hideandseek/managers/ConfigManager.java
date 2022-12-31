@@ -47,10 +47,11 @@ public class ConfigManager {
 
 
 
-            if (parentSection.getConfigurationSection(arena.arenaName) != null) {
-                HideAndSeek.instance.print("error, naser si!");
+            /*if (parentSection.getConfigurationSection(arena.arenaName) != null) {
+
+                HideAndSeek.instance.print("Arena is alredy existing!");
                 break; //stopuje for loop
-            }
+            }*/
 
 
 

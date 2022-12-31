@@ -81,7 +81,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         break;
                     case "reload":
                         if (!sender.hasPermission("has.reload")) {
-                            sender.sendMessage(prefix + invalidMessage);
+                            sender.sendMessage(prefix + noPerms);
                         }
                         sender.sendMessage(prefix + "Please wait, reloading plugin!");
                         HideAndSeek.instance.reloadConfig();
@@ -103,7 +103,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             List<String> arguments = new ArrayList<>();
             arguments.add("help");
             if (sender.hasPermission("has.tab")) {
-                arguments.add("relaod");
+                arguments.add("reload");
                 arguments.add("createarena");
             }
             return arguments;
