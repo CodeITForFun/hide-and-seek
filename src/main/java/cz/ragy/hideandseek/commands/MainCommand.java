@@ -8,7 +8,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -18,9 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
-
-    public String errorUsageMessage = "Error! use command like this: /has createarena [maxplayers] [minplayers] [seekersCount] [hidersCount] [arenaName] [arenaWorldName]";
-
     public File file = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
     public FileConfiguration config = YamlConfiguration.loadConfiguration(file);
     public String prefix = (String) config.get("Core.Prefix");
@@ -44,22 +40,17 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                     case "help":
                         sender.sendMessage("pOMOC JE NA CESTE");
                         break;
-                    /*case "createarena":
-                        //has createarena
-                        new Arena(5, 3, 1, 4, "Test", "world");
-                        break;*/
                 }
             }
-            if (args.length > 1 && args.length == 7) {
+            if (args.length > 1 && args.length == 6) {
                 switch(args[0]) {
                     case "createarena":
-
                         if (!player.hasPermission("has.createarena")) { sender.sendMessage(noPerms); return true; }
-
-                        //    /has createarena args1 args2 args3 args4 args5 args6
+                        //    /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]
                         Digit digit = new Digit();
-                        if(digit.containsDigits(args[1]) && digit.containsDigits(args[2]) && digit.containsDigits(args[3]) && digit.containsDigits(args[4]) && !(digit.containsDigits(args[5]))){
+                        if(!(digit.containsDigits(args[1])) && !(digit.containsDigits(args[2])) && digit.containsDigits(args[3]) && digit.containsDigits(args[4]) && digit.containsDigits(args[5])){
                             sender.sendMessage(creating);
+
                             String arenaName = args[1];
                             String arenaWorldName = args[2];
                             int maxPlayers = Integer.parseInt(args[3]);

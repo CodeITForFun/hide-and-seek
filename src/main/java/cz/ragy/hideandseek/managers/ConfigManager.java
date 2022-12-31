@@ -27,16 +27,37 @@ public class ConfigManager {
         }
     }
     public void saveArenas(List<Arena> arenaList){
-        arenas = new YamlConfiguration();
-        FileConfiguration arenacfg = YamlConfiguration.loadConfiguration(arenasFile);
-        //FileConfiguration arenaConfig = YamlConfiguration.loadConfiguration(arenasFile);
-        ConfigurationSection settings = arenacfg.getConfigurationSection("arenas");
-        arenaList.forEach(arena -> settings.addDefault(arena.arenaName, arena));
+        FileConfiguration arenaConfig = YamlConfiguration.loadConfiguration(arenasFile);
+
+        if (arenaConfig.getConfigurationSection("arenas") == null) {
+            arenaConfig.createSection("arenas");
+        }
+        try {
+            arenaConfig.save(arenasFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        // Get the parent ConfigurationSection
+        ConfigurationSection parentSection = arenaConfig.getConfigurationSection("arenas");
+
+        arenaList.forEach(arena -> {
+            ConfigurationSection childSection = parentSection.createSection(arena.arenaName);
+            childSection.set("ArenaName", arena.arenaName);
+            childSection.set("ArenaWorld", arena.arenaWorldName);
+            childSection.set("ArenaMaxPlayers", arena.maxPlayers);
+            childSection.set("ArenaMinPlayers", arena.minPlayers);
+            childSection.set("ArenaSeekersCount", arena.seekersCount);
+        });
+        /*ConfigurationSection finalSettings = settings;
+        //finalSettings.set("arenas", );
+        arenaList.forEach(arena -> finalSettings.set("arenas", arena.arenaName));*/
 
         try {
-            arenas.save(arenasFile);
+            arenaConfig.save(arenasFile);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 }

@@ -21,7 +21,7 @@ Core:
 
 
 Create-Arena:
-  Invalid-Message: "Error! use command like this: /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount] [hidersCount]"
+  Invalid-Message: "Error! use command like this: /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]"
   Creating-Arena: "Please wait, alredy creating arena!"
 
 Database:
