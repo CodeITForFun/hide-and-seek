@@ -15,19 +15,14 @@ import java.util.List;
 public class ConfigManager {
     private final File configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
     private final File arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
-
     public File file = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
     public FileConfiguration confik = YamlConfiguration.loadConfiguration(file);
-
-    public String creating = (String) confik.get("Create-Arena.Creating-Arena");
-    public String arenaCreated = (String) confik.get("Create-Arena.Created");
-
-    public String arenaExists = (String) confik.get("Create-Arena.Arena-Exists");
-
-    public String setArena;
-
     public static YamlConfiguration arenas;
     public static YamlConfiguration config;
+    public String setArena;
+    public String creating = (String) confik.get("Create-Arena.Creating-Arena");
+    public String arenaCreated = (String) confik.get("Create-Arena.Created");
+    public String arenaExists = (String) confik.get("Create-Arena.Arena-Exists");
     public void startup(){
         if(!configFile.exists()) {
             config = new YamlConfiguration();

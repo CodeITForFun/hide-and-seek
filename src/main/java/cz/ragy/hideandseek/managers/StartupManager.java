@@ -17,7 +17,6 @@ public class StartupManager {
                 .replace("]", "")
                 .trim();
 
-
         server.getLogger().info("Loading config files...");
         new ConfigManager().startup();
 
