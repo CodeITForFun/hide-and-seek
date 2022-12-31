@@ -27,33 +27,44 @@ public class ConfigManager {
         }
     }
     public void saveArenas(List<Arena> arenaList){
+        //TODO: fix creating same arenas, load arena on server startup
+
         FileConfiguration arenaConfig = YamlConfiguration.loadConfiguration(arenasFile);
 
         if (arenaConfig.getConfigurationSection("arenas") == null) {
             arenaConfig.createSection("arenas");
-        }
-        try {
-            arenaConfig.save(arenasFile);
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                arenaConfig.save(arenasFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-
-        // Get the parent ConfigurationSection
         ConfigurationSection parentSection = arenaConfig.getConfigurationSection("arenas");
-
-        arenaList.forEach(arena -> {
+        for (Arena arena : arenaList) {
             ConfigurationSection childSection = parentSection.createSection(arena.arenaName);
-            childSection.set("ArenaName", arena.arenaName);
+            //fix creating same arena
+
+
+
+            if (parentSection.getConfigurationSection(arena.arenaName) != null) {
+                System.out.println("error, naser si!");
+                break; //stopuje for loop
+            }
+
+
+
+
+
+
+
+
+
             childSection.set("ArenaWorld", arena.arenaWorldName);
             childSection.set("ArenaMaxPlayers", arena.maxPlayers);
             childSection.set("ArenaMinPlayers", arena.minPlayers);
             childSection.set("ArenaSeekersCount", arena.seekersCount);
-        });
-        /*ConfigurationSection finalSettings = settings;
-        //finalSettings.set("arenas", );
-        arenaList.forEach(arena -> finalSettings.set("arenas", arena.arenaName));*/
-
+        }
         try {
             arenaConfig.save(arenasFile);
         } catch (IOException e) {
