@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
+
     public File file = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
     public FileConfiguration config = YamlConfiguration.loadConfiguration(file);
     public String prefix = (String) config.get("Core.Prefix");
@@ -24,6 +25,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public String invalidMessage = (String) config.get("Create-Arena.Invalid-Message");
     public String notEntity = (String) config.get("Core.notEntity");
     public String creating = (String) config.get("Create-Arena.Creating-Arena");
+    public String arenaCreated = (String) config.get("Create-Arena.Created");
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
@@ -67,6 +70,10 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                             ArenaManager arenaManager = new ArenaManager();
                             arenaManager.addArenaToList(createdArena);
 
+                            String setArena = arenaCreated;
+                            setArena = setArena.replace("%arena%", arenaName);
+
+                            sender.sendMessage(setArena);
 
                         } else {
                             sender.sendMessage(prefix + invalidMessage);

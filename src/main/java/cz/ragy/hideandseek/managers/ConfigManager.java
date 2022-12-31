@@ -48,7 +48,7 @@ public class ConfigManager {
 
 
             if (parentSection.getConfigurationSection(arena.arenaName) != null) {
-                System.out.println("error, naser si!");
+                HideAndSeek.instance.print("error, naser si!");
                 break; //stopuje for loop
             }
 

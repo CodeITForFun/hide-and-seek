@@ -15,20 +15,22 @@
 
 
 Core:
-  No-Permission: "pico L nemas prava"
-  Prefix: "Hide And Seek "
-  notEntity: "chod na server"
+  No-Permission: "pico L nemas prava" # Message displayed when a player does not have permission to use a command
+  Prefix: "Hide And Seek " # Prefix for all messages from this plugin
+  notEntity: "chod na server" # Message displayed when a player is not targeting a valid entity
 
 
 Create-Arena:
   Invalid-Message: "Error! use command like this: /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]"
+  Created: "Your arena has been successfully created as %arena%!" # Use %arena% for show arena name
   Creating-Arena: "Please wait, alredy creating arena!"
 
 Database:
-  #MySQL, SQLite, Default: SQLite
+  # Type of database to use (options: MySQL, SQLite, Default: SQLite)
   Type: MySQL
-  host: "localhost"
-  port: ""
-  username: "root"
-  database: "test"
-  password: ""
+  host: "localhost" # Hostname for MySQL database
+  port: "3306" # Port for MySQL database
+  username: "root" # Username for MySQL database
+  database: "test" # Database name for MySQL
+  password: "" # Password for MySQL database
+
