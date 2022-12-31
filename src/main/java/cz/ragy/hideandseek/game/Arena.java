@@ -28,9 +28,7 @@ public class Arena {
     public void addArenaPlayers(List<Player> players){
         players.forEach(player -> this.arenaPlayers.add(player));
     }
-
     public void setPlaying(boolean p){
         this.playing = p;
     }
-
 }

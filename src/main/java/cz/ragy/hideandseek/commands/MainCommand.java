@@ -51,6 +51,12 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                     case "createarena":
                         sender.sendMessage(prefix + invalidMessage);
                         break;
+                    case "setuphelp":
+                        //send dumbass messages
+                        break;
+                    case "setuplobby":
+                        //setup lobby point
+                        break;
                 }
             }
             if (args.length > 1 && args.length == 6) {
@@ -92,6 +98,9 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             if (sender.hasPermission("has.tab") || sender.hasPermission("has.*")) {
                 arguments.add("reload");
                 arguments.add("createarena");
+                arguments.add("joinarena");
+                arguments.add("setuphelp");
+                arguments.add("setuplobby");
             }
             return arguments;
     }
