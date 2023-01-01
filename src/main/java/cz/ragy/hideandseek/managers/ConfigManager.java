@@ -2,6 +2,7 @@ package cz.ragy.hideandseek.managers;
 
 import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.HideAndSeek;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -71,5 +72,9 @@ public class ConfigManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void reloadAllConfigs(){
+        Bukkit.getPluginManager().disablePlugin(HideAndSeek.instance);
+        Bukkit.getPluginManager().enablePlugin(HideAndSeek.instance);
     }
 }

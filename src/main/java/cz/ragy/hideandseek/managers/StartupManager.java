@@ -2,6 +2,7 @@ package cz.ragy.hideandseek.managers;
 
 import cz.ragy.hideandseek.commands.MainCommand;
 import cz.ragy.hideandseek.HideAndSeek;
+import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -39,6 +40,9 @@ public class StartupManager {
                 e.printStackTrace();
             }
         }
+        server.getLogger().info("Loading autobroadcast...");
+        int interval = ConfigManager.config.getInt("Auto-Broadcast.interval");
+        new MessageManager().runTaskTimerAsynchronously(HideAndSeek.instance, interval * 20L, interval * 20L);
         server.getLogger().info("\n\n\n" +
                 "\n" +
                 "  _    _ _     _                         _  _____           _    \n" +

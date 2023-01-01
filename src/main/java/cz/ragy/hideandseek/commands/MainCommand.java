@@ -52,15 +52,17 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                     case "reload":
                         if (!sender.hasPermission("has.reload") || !sender.hasPermission("has.*")) { sender.sendMessage(Colors.translate(prefix + noPerms)); return true;}
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + Reload)));
-                        File configFile = new File("config.yml");
-                        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
-                        // Reload the config file
+
+                        new ConfigManager().reloadAllConfigs();
+
+                        /*ConfigManager.
+
                         config = YamlConfiguration.loadConfiguration(configFile);
                         // Save the config file
                         try { config.save(configFile); } catch (IOException e) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("&cError! Please look into console!"))); new MessageManager().printWarn(String.valueOf(e));
                         }
                         HideAndSeek.instance.reloadConfig();
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + sucReloaded)));
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + sucReloaded)));*/
                         break;
                     case "setup":
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("pruvodce more")));
@@ -95,6 +97,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             }
             if (args.length == 7) {
                 if (args[0].equals("setup")) {
+
                     if (args[1].equals("arena")) {
                         if (!player.hasPermission("has.createarena") || !sender.hasPermission("has.*")) { sender.sendMessage(Colors.translate(noPerms)); return true; }
                         Digit digit = new Digit();
