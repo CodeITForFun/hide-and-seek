@@ -15,11 +15,12 @@
 
 
 Core:
-  No-Permission: "pico L nemas prava" # Message displayed when a player does not have permission to use a command
-  Prefix: "Hide And Seek " # Prefix for all messages from this plugin
+  No-Permission: "&c You don´t have permissions." # Message displayed when a player does not have permission to use a command
+  Prefix: "&8[&e&lHA&eS&8] &7>> &r" # Prefix for all messages from this plugin
   notEntity: "chod na server" # Message displayed when a player is not targeting a valid entity
 
 Lobby:
+  Success: "&7Lobby has been &a&lSUCCESSFULLY setuped&7!"
   onJoinLobby: true #When player joins server it teleports him to defined point
   onJoinX: 40.9 #X position of lobby spawn
   onJoinY: 140.6 #Y position of lobby spawn

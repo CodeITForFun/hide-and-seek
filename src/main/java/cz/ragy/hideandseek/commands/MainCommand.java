@@ -4,6 +4,8 @@ import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.managers.ArenaManager;
 import cz.ragy.hideandseek.utilities.Digit;
+import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,6 +27,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public String notEntity = (String) config.get("Core.notEntity");
     public String Reload = (String) config.get("Reload.Reload-Message");
     public String sucReloaded = (String) config.get("Reload.Successfully-Reloaded");
+    public String lobbySet = (String) config.get("Lobby.Success");
+    public String lobbyFailed = (String) config.get("Lobby.Error");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -33,44 +37,45 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             if(args.length == 0) {
                 switch (command.getName()) {
                     case "has":
-                        sender.sendMessage("It works!");
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,"It works!"));
                         break;
                 }
             }
             if (args.length == 1) {
                 switch (args[0]) {
                     case "help":
-                        sender.sendMessage("pOMOC JE NA CESTE");
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,"pOMOC JE NA CESTE"));
                         break;
                     case "reload":
                         if (!sender.hasPermission("has.reload") || !sender.hasPermission("has.*")) { sender.sendMessage(prefix + noPerms); return true;}
-                        sender.sendMessage(prefix + Reload);
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, prefix + Reload));
                         HideAndSeek.instance.reloadConfig();
-                        sender.sendMessage(prefix + sucReloaded);
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, prefix + sucReloaded));
                         break;
                     case "setup":
-                        sender.sendMessage("pruvodce more");
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,"pruvodce more"));
                         break;
                 }
             }
-            if(args.length == 2){
+            if(args.length == 2) {
+                if (!(sender.hasPermission("has.setLobby"))) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, noPerms)); return true; }
+
                 if(args[0].equals("setup")) {
                     if(args[1].equals("lobby")) {
-                        sender.sendMessage("Setting lobby point");
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,lobbySet));
                         config.set("Lobby.onJoinX", player.getLocation().getX());
                         config.set("Lobby.onJoinY", player.getLocation().getY());
                         config.set("Lobby.onJoinZ", player.getLocation().getZ());
                         config.set("Lobby.onJoinPitch", player.getLocation().getPitch());
                         config.set("Lobby.onJoinYaw", player.getLocation().getYaw());
+                        return true;
                     }
-                    if(args[1].equals("arena")){
-                        sender.sendMessage(prefix + invalidMessage);
-                    }
+                    if (args[1].equals("arena")) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,prefix + invalidMessage)); }
                 }
             }
-            if(args.length == 7) {
-                if(args[0].equals("setup")) {
-                    if(args[1].equals("arena")) {
+            if (args.length == 7) {
+                if (args[0].equals("setup")) {
+                    if (args[1].equals("arena")) {
                         if (!player.hasPermission("has.createarena") || !sender.hasPermission("has.*")) { sender.sendMessage(noPerms); return true; }
                         Digit digit = new Digit();
 
@@ -90,18 +95,18 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                             ArenaManager arenaManager = new ArenaManager();
                             arenaManager.addArenaToList(createdArena, sender);
                         } else {
-                            sender.sendMessage(prefix + invalidMessage);
+                            sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,prefix + invalidMessage));
                         }
                     } else {
-                        sender.sendMessage(prefix + invalidMessage);
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,prefix + invalidMessage));
                     }
                 } else {
-                    sender.sendMessage(prefix + invalidMessage);
+                    sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,prefix + invalidMessage));
                 }
             }
-            if(args.length > 7 && args[1].equals("arena") && args[0].equals("setup")) { sender.sendMessage(prefix + invalidMessage); return true; }
+            if(args.length > 7 && args[1].equals("arena") && args[0].equals("setup")) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,prefix + invalidMessage)); return true; }
             return true;
-        } else { sender.sendMessage(notEntity); return true; }
+        } else { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, notEntity)); return true; }
     }
 
     @Override
@@ -109,9 +114,9 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         if(args.length == 1){
             List<String> arguments = new ArrayList<>();
             arguments.add("help");
+            arguments.add("joinarena");
             if (sender.hasPermission("has.tab") || sender.hasPermission("has.*")) {
                 arguments.add("reload");
-                arguments.add("joinarena");
                 arguments.add("setup");
             }
             return arguments;
