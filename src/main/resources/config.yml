@@ -48,3 +48,12 @@ Database:
   username: "root" # Username for MySQL database
   database: "test" # Database name for MySQL
   password: "" # Password for MySQL database
+
+Auto-Broadcast:
+  interval: 120
+  random: true
+  messages:
+    - "&8[&cZprávy&8] &7Tvé statistiky z miniher si můžeš kontrolovat ve svém profilu."
+    - "&8[&cZprávy&8] &7Pokud hledáš pomoc, neváhej si vytvořit ticket na našem discordu."
+    - "&8[&cZprávy&8] &7Náš server podporuje od 1.16.4 až 1.19.2 verze."
+    - "&8[&cZprávy&8] &7Pokud chceš své coiny přeměnit na jiný ůčet, použi příkaz /coins convert"
