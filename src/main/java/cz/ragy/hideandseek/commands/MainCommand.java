@@ -3,6 +3,8 @@ package cz.ragy.hideandseek.commands;
 import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.managers.ArenaManager;
+import cz.ragy.hideandseek.managers.ConfigManager;
+import cz.ragy.hideandseek.managers.MessageManager;
 import cz.ragy.hideandseek.utilities.Colors;
 import cz.ragy.hideandseek.utilities.Digit;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -21,18 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
-    public File file = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
-    public FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-    public String prefix = (String) config.get("Core.Prefix");
-    public String noPerms = (String) config.get("Core.No-Permission");
-    public String invalidMessage = (String) config.get("Create-Arena.Invalid-Message");
-    public String notEntity = (String) config.get("Core.notEntity");
-    public String Reload = (String) config.get("Reload.Reload-Message");
-    public String sucReloaded = (String) config.get("Reload.Successfully-Reloaded");
-    public String lobbySet = (String) config.get("Lobby.Success");
-    public boolean LobbyStatus = (boolean) config.get("Lobby.onJoinLobby");
-
-    public String LobbyWarning = (String) config.get("Lobby.Warning");
+    public String prefix = (String) ConfigManager.config.get("Core.Prefix");
+    public String noPerms = (String) ConfigManager.config.get("Core.No-Permission");
+    public String invalidMessage = (String) ConfigManager.config.get("Create-Arena.Invalid-Message");
+    public String notEntity = (String) ConfigManager.config.get("Core.notEntity");
+    public String Reload = (String) ConfigManager.config.get("Reload.Reload-Message");
+    public String sucReloaded = (String) ConfigManager.config.get("Reload.Successfully-Reloaded");
+    public String lobbySet = (String) ConfigManager.config.get("Lobby.Success");
+    public boolean LobbySpawnStatus = ConfigManager.config.getBoolean("Lobby.onJoinLobby");
+    public String LobbyWarning = (String) ConfigManager.config.get("Lobby.Warning");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -58,7 +57,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         // Reload the config file
                         config = YamlConfiguration.loadConfiguration(configFile);
                         // Save the config file
-                        try { config.save(configFile); } catch (IOException e) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("&cError! Please look into console!"))); HideAndSeek.instance.printWarn(String.valueOf(e)); }
+                        try { config.save(configFile); } catch (IOException e) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("&cError! Please look into console!"))); new MessageManager().printWarn(String.valueOf(e));
+                        }
                         HideAndSeek.instance.reloadConfig();
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + sucReloaded)));
                         break;
@@ -75,12 +75,17 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 if(args[0].equals("setup")) {
                     if(args[1].equals("lobby")) {
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(lobbySet)));
-                        config.set("Lobby.onJoinX", player.getLocation().getX());
-                        config.set("Lobby.onJoinY", player.getLocation().getY());
-                        config.set("Lobby.onJoinZ", player.getLocation().getZ());
-                        config.set("Lobby.onJoinPitch", player.getLocation().getPitch());
-                        config.set("Lobby.onJoinYaw", player.getLocation().getYaw());
-                        if (!LobbyStatus) {
+                        ConfigManager.config.set("Lobby.onJoinX", player.getLocation().getX());
+                        ConfigManager.config.set("Lobby.onJoinY", player.getLocation().getY());
+                        ConfigManager.config.set("Lobby.onJoinZ", player.getLocation().getZ());
+                        ConfigManager.config.set("Lobby.onJoinPitch", player.getLocation().getPitch());
+                        ConfigManager.config.set("Lobby.onJoinYaw", player.getLocation().getYaw());
+                        try {
+                            ConfigManager.config.save(ConfigManager.configFile);
+                        } catch(IOException e){
+                            e.printStackTrace();
+                        }
+                        if (!LobbySpawnStatus) {
                             sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(LobbyWarning)));
                         }
                         return true;

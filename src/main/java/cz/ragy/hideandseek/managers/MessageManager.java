@@ -14,18 +14,9 @@ import java.util.List;
 import java.util.Random;
 
 public class MessageManager extends BukkitRunnable {
-    private List<String> messages;
-    private boolean random;
+    private List<String> messages = ConfigManager.config.getStringList("messages");;
+    private boolean random = ConfigManager.config.getBoolean("random");;
     private int lastMessage;
-
-
-    public MessageManager(HideAndSeek plugin) {
-        File file = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-
-        this.random = (boolean) config.get("random");
-        this.messages = config.getStringList("messages");
-    }
 
     @Override
     public void run() {
@@ -58,4 +49,6 @@ public class MessageManager extends BukkitRunnable {
             player.sendMessage(PlaceholderAPI.setPlaceholders(player.getPlayer(), Colors.translate(message)));
         }
     }
+    public void printInfo(String s) { HideAndSeek.instance.getLogger().info(s); }
+    public void printWarn(String s) { HideAndSeek.instance.getLogger().warning(s); }
 }

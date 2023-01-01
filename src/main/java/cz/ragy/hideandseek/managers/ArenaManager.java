@@ -9,13 +9,12 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class ArenaManager {
     public List<Arena> arenas = new ArrayList<Arena>();
     public void addArenaToList(Arena arena, CommandSender sender){
         arenas.add(arena);
-        new ConfigManager().saveArenas(arenas, sender);
+        new ConfigManager().saveArenasToConfig(arenas, sender);
     }
     public void removeArenaFromList(Arena arena) {
         arenas.remove(arena);

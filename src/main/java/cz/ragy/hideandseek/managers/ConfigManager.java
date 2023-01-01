@@ -12,10 +12,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class ConfigManager {
-    private final File configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
-    private final File arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
-    public File file = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
-    public FileConfiguration confik = YamlConfiguration.loadConfiguration(file);
+    public static final File configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
+    public static final File arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
+    public FileConfiguration confik = YamlConfiguration.loadConfiguration(configFile);
     public static YamlConfiguration arenas;
     public static YamlConfiguration config;
     public String setArena;
@@ -24,26 +23,26 @@ public class ConfigManager {
     public String arenaExists = (String) confik.get("Create-Arena.Arena-Exists");
     public void startup() {
         if(!configFile.exists()) {
-            config = new YamlConfiguration();
             HideAndSeek.instance.saveResource("config.yml", true);
         }
         if(!arenasFile.exists()){
-            arenas = new YamlConfiguration();
             HideAndSeek.instance.saveResource("arenas.yml", true);
         }
-    }
-    public void saveArenas(List<Arena> arenaList, CommandSender sender){
-        FileConfiguration arenaConfig = YamlConfiguration.loadConfiguration(arenasFile);
+        arenas = new YamlConfiguration().loadConfiguration(arenasFile);
+        config = new YamlConfiguration().loadConfiguration(configFile);
 
-        if (arenaConfig.getConfigurationSection("arenas") == null) {
-            arenaConfig.createSection("arenas");
+    }
+    public void saveArenasToConfig(List<Arena> arenaList, CommandSender sender){
+
+        if (arenas.getConfigurationSection("arenas") == null) {
+            arenas.createSection("arenas");
             try {
-                arenaConfig.save(arenasFile);
+                arenas.save(arenasFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        ConfigurationSection parentSection = arenaConfig.getConfigurationSection("arenas");
+        ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
 
         for (Arena arena : arenaList) {
             if (parentSection.getConfigurationSection(arena.arenaName) == null) {
@@ -68,7 +67,7 @@ public class ConfigManager {
             }
         }
         try {
-            arenaConfig.save(arenasFile);
+            arenas.save(arenasFile);
         } catch (IOException e) {
             e.printStackTrace();
         }

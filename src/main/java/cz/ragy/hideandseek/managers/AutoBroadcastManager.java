@@ -20,11 +20,8 @@ public class AutoBroadcastManager extends BukkitRunnable {
     private int lastMessage;
 
     public AutoBroadcastManager(HideAndSeek plugin) {
-        File file = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-
-        this.random = (boolean) config.get("Auto-Broadcast.random");
-        this.messages = config.getStringList("Auto-Broadcast.messages");
+        this.random = ConfigManager.config.getBoolean("Auto-Broadcast.random");
+        this.messages = ConfigManager.config.getStringList("Auto-Broadcast.messages");
     }
 
     @Override

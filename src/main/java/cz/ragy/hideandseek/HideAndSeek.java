@@ -33,8 +33,8 @@ public final class HideAndSeek extends JavaPlugin implements Listener {
         File file = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         if (getServer().getOnlinePlayers().size() >= 1) {
-            int interval = (int) config.getInt("interval") * 20;
-            new MessageManager(this).runTaskTimer(this, 0, interval);
+            int interval = config.getInt("interval") * 20;
+            new MessageManager().runTaskTimer(this, 0, interval);
         }
     }
     public void printInfo(String s) { getLogger().info(s); }
