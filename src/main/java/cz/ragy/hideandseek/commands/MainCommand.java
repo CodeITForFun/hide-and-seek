@@ -56,7 +56,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + sucReloaded)));
                         break;
                     case "setup":
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("pruvodce more")));
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("&7Hello, welcome to &eHide & Seek Plugin by Radekminecraft and FungY911.\nThis is Setup Wizard for this plugin.\n\nIf you need any help, you can join to [&9Discord server](https://discord.gg/EgqNXXcx2q)")));
+                        //player.chat("/has setup lobby"); //automatically execute command
                         break;
                     default:
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("help message")));
@@ -81,6 +82,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         if (!LobbySpawnStatus) {
                             sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(LobbyWarning)));
                         }
+                        new ConfigManager().reloadAllConfigs();
                         return true;
                     }
                     if (args[1].equals("arena")) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(prefix + invalidMessage))); }

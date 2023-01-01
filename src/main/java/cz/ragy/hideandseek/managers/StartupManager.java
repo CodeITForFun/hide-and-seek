@@ -40,7 +40,7 @@ public class StartupManager {
                 e.printStackTrace();
             }
         }
-        server.getLogger().info("Loading autobroadcast...");
+        server.getLogger().info("Starting autobroadcast...");
         int interval = ConfigManager.config.getInt("Auto-Broadcast.interval");
         new MessageManager().runTaskTimerAsynchronously(HideAndSeek.instance, interval * 20L, interval * 20L);
         server.getLogger().info("\n\n\n" +
