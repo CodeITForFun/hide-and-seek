@@ -37,7 +37,6 @@ public class StartupManager {
                 e.printStackTrace();
             }
         }
-
         server.getLogger().info("\n\n\n" +
                 "\n" +
                 "  _    _ _     _                         _  _____           _    \n" +
@@ -55,3 +54,4 @@ public class StartupManager {
                 "\n\n\n");
     }
 }
+
