@@ -19,7 +19,6 @@ public class DmgBreak implements Listener {
     public boolean Damage = ConfigManager.config.getBoolean("Lobby.Damage");
     @EventHandler
     public void Lobby(EntityDamageEvent event) {
-        System.out.println(worldName);
         World world = Bukkit.getWorld(worldName);
         if (event.getEntity() instanceof Player) {
             if (event.getEntity().getWorld().equals(world)) {

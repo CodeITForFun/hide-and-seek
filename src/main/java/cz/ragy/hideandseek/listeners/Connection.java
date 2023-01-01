@@ -28,7 +28,6 @@ public class Connection implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        System.out.println(worldName);
         if(tpOnJoin) {
             World world = Bukkit.getWorld(worldName);
             player.teleport(new Location(world, onJoinX, onJoinY, onJoinZ, (float) onJoinYaw, (float) onJoinPitch));
