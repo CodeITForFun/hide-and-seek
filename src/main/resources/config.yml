@@ -24,6 +24,8 @@ Lobby:
   onJoinX: 40.9 #X position of lobby spawn
   onJoinY: 140.6 #Y position of lobby spawn
   onJoinZ: 33.4 #Z position of lobby spawn
+  onJoinPitch: 30.5
+  onJoinYaw: 40.3
   onJoinWorldName: "world" #Name of the world
 Reload:
   Reload-Message: "Please wait, reloading plugin!"

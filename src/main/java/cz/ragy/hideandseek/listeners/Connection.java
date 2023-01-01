@@ -21,6 +21,9 @@ public class Connection implements Listener {
     public double onJoinX = (double) config.get("Lobby.onJoinX");
     public double onJoinY = (double) config.get("Lobby.onJoinY");
     public double onJoinZ = (double) config.get("Lobby.onJoinZ");
+
+    public double onJoinPitch = (double) config.get("Lobby.onJoinPitch");
+    public double onJoinYaw = (double) config.get("Lobby.onJoinYaw");
     public String worldName = (String) config.get("Lobby.onJoinWorldName");
 
     @EventHandler
@@ -28,7 +31,7 @@ public class Connection implements Listener {
         Player player = event.getPlayer();
         if(tpOnJoin) {
             World world = Bukkit.getWorld(worldName);
-            player.teleport(new Location(world, onJoinX, onJoinY, onJoinZ));
+            player.teleport(new Location(world, onJoinX, onJoinY, onJoinZ, (float) onJoinYaw, (float) onJoinPitch));
         }
     }
 }

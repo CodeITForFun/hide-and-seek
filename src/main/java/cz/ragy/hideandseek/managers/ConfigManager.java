@@ -22,7 +22,7 @@ public class ConfigManager {
     public String creating = (String) confik.get("Create-Arena.Creating-Arena");
     public String arenaCreated = (String) confik.get("Create-Arena.Created");
     public String arenaExists = (String) confik.get("Create-Arena.Arena-Exists");
-    public void startup(){
+    public void startup() {
         if(!configFile.exists()) {
             config = new YamlConfiguration();
             HideAndSeek.instance.saveResource("config.yml", true);
