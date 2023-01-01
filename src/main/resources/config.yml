@@ -16,11 +16,12 @@
 
 Core:
   No-Permission: "&c You don´t have permissions." # Message displayed when a player does not have permission to use a command
-  Prefix: "&8[&e&lHA&eS&8] &7>> &r" # Prefix for all messages from this plugin
+  Prefix: "&8[&e&lH&eA&e&lS&8] &7>> &r" # Prefix for all messages from this plugin
   notEntity: "chod na server" # Message displayed when a player is not targeting a valid entity
 
 Lobby:
   Success: "&7Lobby has been &a&lSUCCESSFULLY setuped&7!"
+  Warning: "&eThe teleport on join is disabled! To enable it, set Lobby.onJoinLobby to true."
   onJoinLobby: true #When player joins server it teleports him to defined point
   onJoinX: 40.9 #X position of lobby spawn
   onJoinY: 140.6 #Y position of lobby spawn
@@ -29,14 +30,14 @@ Lobby:
   onJoinYaw: 40.3
   onJoinWorldName: "world" #Name of the world
 Reload:
-  Reload-Message: "Please wait, reloading plugin!"
-  Successfully-Reloaded: "Files arenas.yml, config.yml has beed reloaded!"
+  Reload-Message: "&cPlease wait, reloading plugin!"
+  Successfully-Reloaded: "&aFiles arenas.yml, config.yml has beed reloaded!"
 
 Create-Arena:
-  Invalid-Message: "Error! use command like this: /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]"
-  Created: "Your arena has been successfully created as %arena%!" # Use %arena% for show arena name
-  Creating-Arena: "Please wait, alredy creating arena!"
-  Arena-Exists: "Error! Arena you created already exists!"
+  Invalid-Message: "&cError! use command like this: /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]"
+  Created: "&aYour arena has been successfully created as %arena%!" # Use %arena% for show arena name
+  Creating-Arena: "&7Please wait, alredy creating arena!"
+  Arena-Exists: "&cError! Arena you created already exists!"
 
 Database:
   # Type of database to use (options: MySQL, SQLite, Default: SQLite)

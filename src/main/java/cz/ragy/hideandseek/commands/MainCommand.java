@@ -3,6 +3,7 @@ package cz.ragy.hideandseek.commands;
 import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.managers.ArenaManager;
+import cz.ragy.hideandseek.utilities.Colors;
 import cz.ragy.hideandseek.utilities.Digit;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.OfflinePlayer;
@@ -28,7 +29,9 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public String Reload = (String) config.get("Reload.Reload-Message");
     public String sucReloaded = (String) config.get("Reload.Successfully-Reloaded");
     public String lobbySet = (String) config.get("Lobby.Success");
-    public String lobbyFailed = (String) config.get("Lobby.Error");
+    public boolean LobbyStatus = (boolean) config.get("Lobby.onJoinLobby");
+
+    public String LobbyWarning = (String) config.get("Lobby.Warning");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -37,46 +40,49 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             if(args.length == 0) {
                 switch (command.getName()) {
                     case "has":
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,"It works!"));
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("It works!")));
                         break;
                 }
             }
             if (args.length == 1) {
                 switch (args[0]) {
                     case "help":
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,"pOMOC JE NA CESTE"));
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("pOMOC JE NA CESTE")));
                         break;
                     case "reload":
-                        if (!sender.hasPermission("has.reload") || !sender.hasPermission("has.*")) { sender.sendMessage(prefix + noPerms); return true;}
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, prefix + Reload));
-                        HideAndSeek.instance.reloadConfig();
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, prefix + sucReloaded));
+                        if (!sender.hasPermission("has.reload") || !sender.hasPermission("has.*")) { sender.sendMessage(Colors.translate(prefix + noPerms)); return true;}
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + Reload)));
+                        hide
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + sucReloaded)));
                         break;
                     case "setup":
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,"pruvodce more"));
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("pruvodce more")));
                         break;
                 }
             }
             if(args.length == 2) {
-                if (!(sender.hasPermission("has.setLobby"))) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, noPerms)); return true; }
+                if (!(sender.hasPermission("has.setLobby"))) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(noPerms))); return true; }
 
                 if(args[0].equals("setup")) {
                     if(args[1].equals("lobby")) {
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,lobbySet));
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(lobbySet)));
                         config.set("Lobby.onJoinX", player.getLocation().getX());
                         config.set("Lobby.onJoinY", player.getLocation().getY());
                         config.set("Lobby.onJoinZ", player.getLocation().getZ());
                         config.set("Lobby.onJoinPitch", player.getLocation().getPitch());
                         config.set("Lobby.onJoinYaw", player.getLocation().getYaw());
+                        if (!LobbyStatus) {
+                            sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(LobbyWarning)));
+                        }
                         return true;
                     }
-                    if (args[1].equals("arena")) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,prefix + invalidMessage)); }
+                    if (args[1].equals("arena")) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(prefix + invalidMessage))); }
                 }
             }
             if (args.length == 7) {
                 if (args[0].equals("setup")) {
                     if (args[1].equals("arena")) {
-                        if (!player.hasPermission("has.createarena") || !sender.hasPermission("has.*")) { sender.sendMessage(noPerms); return true; }
+                        if (!player.hasPermission("has.createarena") || !sender.hasPermission("has.*")) { sender.sendMessage(Colors.translate(noPerms)); return true; }
                         Digit digit = new Digit();
 
                         if( !(digit.containsDigits(args[2])) &&
@@ -95,18 +101,18 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                             ArenaManager arenaManager = new ArenaManager();
                             arenaManager.addArenaToList(createdArena, sender);
                         } else {
-                            sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,prefix + invalidMessage));
+                            sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(prefix + invalidMessage)));
                         }
                     } else {
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,prefix + invalidMessage));
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(prefix + invalidMessage)));
                     }
                 } else {
-                    sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,prefix + invalidMessage));
+                    sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(prefix + invalidMessage)));
                 }
             }
-            if(args.length > 7 && args[1].equals("arena") && args[0].equals("setup")) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,prefix + invalidMessage)); return true; }
+            if(args.length > 7 && args[1].equals("arena") && args[0].equals("setup")) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(prefix + invalidMessage))); return true; }
             return true;
-        } else { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, notEntity)); return true; }
+        } else { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(notEntity))); return true; }
     }
 
     @Override
