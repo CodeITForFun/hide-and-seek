@@ -18,9 +18,9 @@ public class Connection implements Listener {
     public FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
     public boolean tpOnJoin = (boolean) config.get("Lobby.onJoinLobby");
 
-    public float onJoinX = (float) config.get("Lobby.onJoinX");
-    public float onJoinY = (float) config.get("Lobby.onJoinY");
-    public float onJoinZ = (float) config.get("Lobby.onJoinZ");
+    public double onJoinX = (double) config.get("Lobby.onJoinX");
+    public double onJoinY = (double) config.get("Lobby.onJoinY");
+    public double onJoinZ = (double) config.get("Lobby.onJoinZ");
     public String worldName = (String) config.get("Lobby.onJoinWorldName");
 
     @EventHandler
