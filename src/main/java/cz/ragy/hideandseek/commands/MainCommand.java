@@ -124,23 +124,5 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         } else {
             return null;
         }
-            if(args.length == 1){
-                List<String> arguments = new ArrayList<>();
-                arguments.add("help");
-                if (sender.hasPermission("has.tab") || sender.hasPermission("has.*")) {
-                    arguments.add("reload");
-                    arguments.add("joinarena");
-                    arguments.add("setup");
-                }
-                return arguments;
-            }
-            if(args.length == 2) {
-                List<String> arguments = new ArrayList<>();
-                arguments.add("arena");
-                arguments.add("lobby");
-                return arguments;
-            } else {
-                return null;
-            }
     }
 }
