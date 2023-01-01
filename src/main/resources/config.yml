@@ -43,4 +43,3 @@ Database:
   username: "root" # Username for MySQL database
   database: "test" # Database name for MySQL
   password: "" # Password for MySQL database
-
