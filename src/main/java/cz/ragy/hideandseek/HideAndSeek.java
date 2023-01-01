@@ -21,6 +21,8 @@ public final class HideAndSeek extends JavaPlugin implements Listener {
             getPluginManager().disablePlugin(this);
         }
     }
+    public void printInfo(String s) { getLogger().info(s); }
+    public void printWarn(String s) { getLogger().warning(s); }
     @Override
     public void onDisable() {}
 }

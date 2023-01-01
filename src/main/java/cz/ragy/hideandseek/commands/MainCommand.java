@@ -16,6 +16,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,12 +53,20 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                     case "reload":
                         if (!sender.hasPermission("has.reload") || !sender.hasPermission("has.*")) { sender.sendMessage(Colors.translate(prefix + noPerms)); return true;}
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + Reload)));
-                        hide
+                        File configFile = new File("config.yml");
+                        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+                        // Reload the config file
+                        config = YamlConfiguration.loadConfiguration(configFile);
+                        // Save the config file
+                        try { config.save(configFile); } catch (IOException e) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("&cError! Please look into console!"))); HideAndSeek.instance.printWarn(String.valueOf(e)); }
+                        HideAndSeek.instance.reloadConfig();
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + sucReloaded)));
                         break;
                     case "setup":
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("pruvodce more")));
                         break;
+                    default:
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("help message")));
                 }
             }
             if(args.length == 2) {
