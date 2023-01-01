@@ -10,6 +10,8 @@ import org.reflections.Reflections;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
+import static org.bukkit.Bukkit.getServer;
+
 public class StartupManager {
     public void startup(Server server, Plugin plugin, HideAndSeek instance){
         String devs = Arrays.asList(plugin.getDescription().getAuthors()).toString()
