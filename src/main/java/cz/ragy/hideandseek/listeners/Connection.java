@@ -16,7 +16,6 @@ import java.io.File;
 
 public class Connection implements Listener {
     public boolean tpOnJoin = ConfigManager.config.getBoolean("Lobby.onJoinLobby");
-
     public double onJoinX = ConfigManager.config.getDouble("Lobby.onJoinX");
     public double onJoinY = ConfigManager.config.getDouble("Lobby.onJoinY");
     public double onJoinZ = ConfigManager.config.getDouble("Lobby.onJoinZ");

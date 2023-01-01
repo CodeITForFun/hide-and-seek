@@ -86,9 +86,13 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                     if (args[1].equals("arena")) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(prefix + invalidMessage))); }
                 }
             }
+            if(args.length > 2) {
+                if(args[0].equals("setup") && args[1].equals("lobby")) {
+                    sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(prefix + invalidMessage)));
+                }
+            }
             if (args.length == 7) {
                 if (args[0].equals("setup")) {
-
                     if (args[1].equals("arena")) {
                         if (!player.hasPermission("has.createarena") || !sender.hasPermission("has.*")) { sender.sendMessage(Colors.translate(noPerms)); return true; }
                         Digit digit = new Digit();
@@ -132,16 +136,28 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             if (sender.hasPermission("has.tab") || sender.hasPermission("has.*")) {
                 arguments.add("reload");
                 arguments.add("setup");
+                arguments.add("editarena");
             }
             return arguments;
-        }
+        } else
         if(args.length == 2) {
-            List<String> arguments = new ArrayList<>();
-            arguments.add("arena");
-            arguments.add("lobby");
-            return arguments;
-        } else {
-            return null;
+            switch(args[0].toLowerCase()) {
+                case "setup":
+                    List<String> arguments = new ArrayList<>();
+                    arguments.add("arena");
+                    arguments.add("lobby");
+                    return arguments;
+                case "editarena":
+                    List<String> arenaList = new ArrayList<>();
+                    if(ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false) == null){
+                        return null;
+                    } else {
+                    for (String key : ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false)) {
+                        arenaList.add(key);
+                        return arenaList;
+                    }}
+            }
         }
+        return null;
     }
 }
