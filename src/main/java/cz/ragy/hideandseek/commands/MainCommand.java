@@ -48,18 +48,44 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         HideAndSeek.instance.reloadConfig();
                         sender.sendMessage(prefix + sucReloaded);
                         break;
-                    case "createarena":
+                    /*case "createarena":
                         sender.sendMessage(prefix + invalidMessage);
-                        break;
-                    case "setuphelp":
-                        //send dumbass messages
-                        break;
-                    case "setuplobby":
-                        //setup lobby point
+                        break;*/
+                    case "setup":
+                        sender.sendMessage("pruvodce more");
                         break;
                 }
             }
-            if (args.length > 1 && args.length == 6) {
+            if(args.length > 2 && args.length == 7){
+                switch(args[0]) {
+                    case "arena":
+                        if (!player.hasPermission("has.createarena") || sender.hasPermission("has.*")) { sender.sendMessage(noPerms); return true; }
+                        Digit digit = new Digit();
+                        if( !(digit.containsDigits(args[1])) &&
+                                !(digit.containsDigits(args[2])) &&
+                                digit.containsDigits(args[3]) &&
+                                digit.containsDigits(args[4]) &&
+                                digit.containsDigits(args[5])){
+
+                            String arenaName = args[1];
+                            String arenaWorldName = args[2];
+                            int maxPlayers = Integer.parseInt(args[3]);
+                            int minPlayers = Integer.parseInt(args[4]);
+                            int seekersCount = Integer.parseInt(args[5]);
+
+                            Arena createdArena = new Arena(arenaName, arenaWorldName, maxPlayers, minPlayers, seekersCount);
+                            ArenaManager arenaManager = new ArenaManager();
+                            arenaManager.addArenaToList(createdArena, sender);
+                        } else {
+                            sender.sendMessage(prefix + invalidMessage);
+                        }
+                        break;
+                    case "lobby":
+                        sender.sendMessage("lobby more seettings");
+                        break;
+                }
+            }
+            /*if (args.length > 1 && args.length == 6) {
                 switch(args[0]) {
                     case "createarena":
                         if (!player.hasPermission("has.createarena") || sender.hasPermission("has.*")) { sender.sendMessage(noPerms); return true; }
@@ -85,23 +111,31 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         }
                         break;
                 }
-            }
-            if(args.length > 6 && args[0] == "createarena") { sender.sendMessage(prefix + invalidMessage); return true; }
+            }*/
+            if(args.length > 7 && args[0] == "createarena") { sender.sendMessage(prefix + invalidMessage); return true; }
             return true;
         } else { sender.sendMessage(notEntity); return true; }
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-            List<String> arguments = new ArrayList<>();
-            arguments.add("help");
-            if (sender.hasPermission("has.tab") || sender.hasPermission("has.*")) {
-                arguments.add("reload");
-                arguments.add("createarena");
-                arguments.add("joinarena");
-                arguments.add("setuphelp");
-                arguments.add("setuplobby");
+            if(args.length == 1){
+                List<String> arguments = new ArrayList<>();
+                arguments.add("help");
+                if (sender.hasPermission("has.tab") || sender.hasPermission("has.*")) {
+                    arguments.add("reload");
+                    arguments.add("joinarena");
+                    arguments.add("setup");
+                }
+                return arguments;
             }
-            return arguments;
+            if(args.length == 2) {
+                List<String> arguments = new ArrayList<>();
+                arguments.add("arena");
+                arguments.add("lobby");
+                return arguments;
+            } else {
+                return null;
+            }
     }
 }

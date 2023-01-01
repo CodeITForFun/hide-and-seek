@@ -15,14 +15,12 @@ public final class HideAndSeek extends JavaPlugin implements Listener {
         getLogger().info("Getting depends");
         Plugin placeholderAPI = getPluginManager().getPlugin("PlaceholderAPI");
         if (placeholderAPI != null && placeholderAPI.isEnabled()) {
-            getPluginManager().registerEvents(this, this);
+            new StartupManager().startup(getServer(), this, this);
         } else {
             getLogger().info("Please install and enable PlaceholderAPI for the Hide And Seek Plugin to work.");
             getPluginManager().disablePlugin(this);
         }
-        new StartupManager().startup(getServer(), this, this);
     }
     @Override
-    public void onDisable() {
-    }
+    public void onDisable() {}
 }
