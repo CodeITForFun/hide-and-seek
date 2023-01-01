@@ -52,17 +52,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                     case "reload":
                         if (!sender.hasPermission("has.reload") || !sender.hasPermission("has.*")) { sender.sendMessage(Colors.translate(prefix + noPerms)); return true;}
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + Reload)));
-
                         new ConfigManager().reloadAllConfigs();
-
-                        /*ConfigManager.
-
-                        config = YamlConfiguration.loadConfiguration(configFile);
-                        // Save the config file
-                        try { config.save(configFile); } catch (IOException e) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("&cError! Please look into console!"))); new MessageManager().printWarn(String.valueOf(e));
-                        }
-                        HideAndSeek.instance.reloadConfig();
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + sucReloaded)));*/
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + sucReloaded)));
                         break;
                     case "setup":
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("pruvodce more")));

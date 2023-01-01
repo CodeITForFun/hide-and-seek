@@ -4,16 +4,12 @@ import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.utilities.Colors;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.io.File;
 import java.util.List;
 import java.util.Random;
 
-import static org.bukkit.Bukkit.getServer;
 
 public class MessageManager extends BukkitRunnable {
     private List<String> messages = ConfigManager.config.getStringList("Auto-Broadcast.messages");;
