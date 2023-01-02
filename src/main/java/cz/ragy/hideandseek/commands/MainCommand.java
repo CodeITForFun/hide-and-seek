@@ -91,8 +91,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 if(args[0].equals("editarena")) {
                     if(!(sender.hasPermission("has.editArena"))) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(noPerms))); return true; }
                     if(new ConfigManager().arenaExists(args[1])) {
-                        new EditMenu(HideAndSeek.getPlayerMenuUtility(player)).open();
-                        EditMenu.arenaname = args[1];
+                        new EditMenu(HideAndSeek.getPlayerMenuUtility(player), args[1]).open();
                         sender.sendMessage(new ConfigManager().getStringFromConfig("Arena.NowEditingArena").replace("%arena%", args[1]));
                     } else {
                         player.sendMessage(new ConfigManager().getStringFromConfig("Arena.ArenaDoesntExist").replace("%arena%", args[1]));
