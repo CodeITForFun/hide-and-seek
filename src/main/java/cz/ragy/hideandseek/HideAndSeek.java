@@ -1,17 +1,13 @@
 package cz.ragy.hideandseek;
 
-import cz.ragy.hideandseek.managers.ConfigManager;
-import cz.ragy.hideandseek.managers.MessageManager;
 import cz.ragy.hideandseek.managers.StartupManager;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.util.HashMap;
 
 import static org.bukkit.Bukkit.getPluginManager;
@@ -39,8 +35,7 @@ public final class HideAndSeek extends JavaPlugin implements Listener {
             playerMenuUtility = new PlayerMenuUtility(p);
             playerMenuUtilityMap.put(p, playerMenuUtility);
             return playerMenuUtility;
-        } else {
-            return playerMenuUtilityMap.get(p);
-        }
+        } else { return playerMenuUtilityMap.get(p); }
+
     }
 }

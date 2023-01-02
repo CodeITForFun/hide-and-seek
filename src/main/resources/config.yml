@@ -45,13 +45,18 @@ Arena:
   NowEditingArena: "You are now editing arena: %arena%"
 
 Database:
-  # Type of database to use (options: MySQL, SQLite, Default: SQLite)
+  # Type of database to use (options: MySQL, SQLite (Alredy not supported), Default: MySQL)
   Type: MySQL
   host: "localhost" # Hostname for MySQL database
-  port: "3306" # Port for MySQL database
+  port: 3306 # Port for MySQL database
   username: "root" # Username for MySQL database
-  database: "test" # Database name for MySQL
-  password: "" # Password for MySQL database
+  database: "has_s1924" # Database name for MySQL
+  password: "root" # Password for MySQL database
+  table: "has_5917" # Name of the table. Leave this to default
+  # Please don't edit any of these
+  # Here is messages for Database
+  Failed:
+  Connected:
 
 Auto-Broadcast:
   interval: 120
