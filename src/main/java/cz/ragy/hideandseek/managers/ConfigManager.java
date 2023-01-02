@@ -1,5 +1,6 @@
 package cz.ragy.hideandseek.managers;
 
+import com.sun.org.apache.xerces.internal.xs.StringList;
 import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.HideAndSeek;
 import org.bukkit.Bukkit;
@@ -10,6 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigManager {
@@ -34,7 +36,6 @@ public class ConfigManager {
         writeToArenaFile();
     }
     public void saveArenasToConfig(List<Arena> arenaList, CommandSender sender){
-
         writeToArenaFile();
         ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
 
@@ -64,6 +65,20 @@ public class ConfigManager {
             arenas.save(arenasFile);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void editArena(String arenaName, String whatToEdit, String toWhat) {
+        ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
+        List<String> strList = new ArrayList<>();
+        for (String key : ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false)) {
+            if(key != arenaName) {
+                System.out.println("err");
+                break;
+            } else {
+                ConfigurationSection childSection = parentSection.getConfigurationSection(arenaName);
+                childSection.set(whatToEdit, toWhat);
+            }
         }
     }
     public void reloadAllConfigs(){
