@@ -40,6 +40,10 @@ Create-Arena:
   Creating-Arena: "&7Please wait, alredy creating arena!"
   Arena-Exists: "&cError! Arena you created already exists!"
 
+Arena:
+  ArenaDoesntExist: "Error! Arena %arena% doesn't exist"
+  NowEditingArena: "You are now editing arena: %arena%"
+
 Database:
   # Type of database to use (options: MySQL, SQLite, Default: SQLite)
   Type: MySQL
@@ -53,7 +57,8 @@ Auto-Broadcast:
   interval: 120
   random: true
   messages:
-    # - "&8[&cServer&8] &7This plugin is created by Radekminecraft and FungY911"
-    - "&8[&cZprávy&8] &7Your message will be sended from here."
+    - "&8[&cServer&8] &7This plugin is created by Radekminecraft and FungY911"
+    - "&8[&cServer&8] &7Your message will be sended from here."
+    - "&8[&cServer&8] &7Do you like cats?"
 
 Permissions:

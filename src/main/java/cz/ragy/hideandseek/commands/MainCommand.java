@@ -5,6 +5,7 @@ import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.managers.ArenaManager;
 import cz.ragy.hideandseek.managers.ConfigManager;
 import cz.ragy.hideandseek.managers.MessageManager;
+import cz.ragy.hideandseek.menusystem.menus.EditMenu;
 import cz.ragy.hideandseek.utilities.Colors;
 import cz.ragy.hideandseek.utilities.Digit;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -86,6 +87,16 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         return true;
                     }
                     if (args[1].equals("arena")) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(prefix + invalidMessage))); }
+                }
+                if(args[0].equals("editarena")) {
+                    if(!(sender.hasPermission("has.editArena"))) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(noPerms))); return true; }
+                    if(new ConfigManager().arenaExists(args[1])) {
+                        new EditMenu(HideAndSeek.getPlayerMenuUtility(player)).open();
+                        sender.sendMessage(new ConfigManager().getStringFromConfig("Arena.NowEditingArena").replace("%arena%", args[1]));
+                    } else {
+                        player.sendMessage(new ConfigManager().getStringFromConfig("Arena.ArenaDoesntExist").replace("%arena%", args[1]));
+                    }
+                    return true;
                 }
             }
             if(args.length > 2) {

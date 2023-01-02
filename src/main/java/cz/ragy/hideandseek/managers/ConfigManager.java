@@ -80,4 +80,15 @@ public class ConfigManager {
             }
         }
     }
+    public boolean arenaExists(String arenaName) {
+        ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
+        if (parentSection.getConfigurationSection(arenaName) == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public String getStringFromConfig(String string) {
+        return config.getString(string);
+    }
 }
