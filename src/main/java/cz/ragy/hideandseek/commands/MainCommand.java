@@ -141,8 +141,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 arguments.add("editarena");
             }
             return arguments;
-        } else
-        if(args.length == 2) {
+        } else if(args.length == 2) {
             switch(args[0].toLowerCase()) {
                 case "setup":
                     List<String> arguments = new ArrayList<>();
@@ -152,12 +151,14 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 case "editarena":
                     List<String> arenaList = new ArrayList<>();
                     if(ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false) == null){
-                        return null;
+                        return arenaList;
                     } else {
                     for (String key : ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false)) {
                         arenaList.add(key);
                         return arenaList;
-                    }}
+                        }
+                    }
+                    return arenaList;
             }
         }
         return null;

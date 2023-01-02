@@ -31,18 +31,11 @@ public class ConfigManager {
         }
         arenas = new YamlConfiguration().loadConfiguration(arenasFile);
         config = new YamlConfiguration().loadConfiguration(configFile);
-
+        writeToArenaFile();
     }
     public void saveArenasToConfig(List<Arena> arenaList, CommandSender sender){
 
-        if (arenas.getConfigurationSection("arenas") == null) {
-            arenas.createSection("arenas");
-            try {
-                arenas.save(arenasFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        writeToArenaFile();
         ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
 
         for (Arena arena : arenaList) {
@@ -76,5 +69,15 @@ public class ConfigManager {
     public void reloadAllConfigs(){
         Bukkit.getPluginManager().disablePlugin(HideAndSeek.instance);
         Bukkit.getPluginManager().enablePlugin(HideAndSeek.instance);
+    }
+    public void writeToArenaFile() {
+        if (arenas.getConfigurationSection("arenas") == null) {
+            arenas.createSection("arenas");
+            try {
+                arenas.save(arenasFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
