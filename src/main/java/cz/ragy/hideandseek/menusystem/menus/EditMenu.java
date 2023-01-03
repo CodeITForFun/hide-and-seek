@@ -1,17 +1,23 @@
 package cz.ragy.hideandseek.menusystem.menus;
 
+import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.listeners.ChatReader;
 import cz.ragy.hideandseek.listeners.ChatEvent;
+import cz.ragy.hideandseek.managers.ConfigManager;
 import cz.ragy.hideandseek.menusystem.Menu;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
 import cz.ragy.hideandseek.utilities.Colors;
+import net.wesjd.anvilgui.AnvilGUI;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EditMenu extends Menu {
     /*
@@ -37,14 +43,22 @@ public class EditMenu extends Menu {
     public void handleMenu(InventoryClickEvent e) {
         switch (e.getCurrentItem().getType()) {
             case OAK_SIGN:
-                if(ChatEvent.targetPlayer != null) {
-                    e.getWhoClicked().sendMessage("Nekdo uz edituje");
-                    e.getView().close();
-                } else {
-                    new ChatReader().createChatConfig("Ahoj", "nn", 30, (Player) e.getWhoClicked(), System.currentTimeMillis(), arenaname);
-                }
-                arenaname = null;
-                e.getView().close();
+                new AnvilGUI.Builder()
+                        .onClose(player -> {
+                            player.sendMessage("You closed the inventory.");
+                        })
+                        .onComplete((completion) -> {
+                            completion.getPlayer().sendMessage(completion.getText());
+                            return Arrays.asList(AnvilGUI.ResponseAction.close());
+                        })
+                        .preventClose()
+                        .text("Arena Name")
+                        .itemLeft(new ItemStack(Material.DIAMOND))
+                        .onLeftInputClick(player -> player.sendMessage("test"))
+                        .onRightInputClick(player -> player.sendMessage("jozoharvat"))
+                        .title("Editing Arena Name")
+                        .plugin(HideAndSeek.instance)
+                        .open((Player) e.getWhoClicked());                                                   //opens the GUI for the player provided
                 break;
         }
     }

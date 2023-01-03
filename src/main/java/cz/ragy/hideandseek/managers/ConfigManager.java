@@ -81,6 +81,13 @@ public class ConfigManager {
             }
         }
     }
+    public void saveArenaConfig() {
+        try {
+            arenas.save(arenasFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void reloadAllConfigs(){
         Bukkit.getPluginManager().disablePlugin(HideAndSeek.instance);
         Bukkit.getPluginManager().enablePlugin(HideAndSeek.instance);
