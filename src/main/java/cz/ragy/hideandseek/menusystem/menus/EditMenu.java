@@ -4,6 +4,7 @@ import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.listeners.ChatReader;
 import cz.ragy.hideandseek.listeners.ChatEvent;
 import cz.ragy.hideandseek.managers.ConfigManager;
+import cz.ragy.hideandseek.managers.MessageManager;
 import cz.ragy.hideandseek.menusystem.Menu;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
 import cz.ragy.hideandseek.utilities.Colors;
@@ -16,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.checkerframework.checker.units.qual.C;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -28,6 +30,8 @@ public class EditMenu extends Menu {
         this.arenaname = arenaName;
     }
     private String arenaname;
+
+    private String newArenaName;
 
     @Override
     public String getMenuName() {
@@ -49,16 +53,26 @@ public class EditMenu extends Menu {
                         })
                         .onComplete((completion) -> {
                             completion.getPlayer().sendMessage(completion.getText());
+                            newArenaName = completion.getText();
                             return Arrays.asList(AnvilGUI.ResponseAction.close());
                         })
                         .preventClose()
                         .text("Arena Name")
-                        .itemLeft(new ItemStack(Material.DIAMOND))
-                        .onLeftInputClick(player -> player.sendMessage("test"))
-                        .onRightInputClick(player -> player.sendMessage("jozoharvat"))
+                        .itemLeft(new ItemStack(Material.OAK_SIGN))
                         .title("Editing Arena Name")
                         .plugin(HideAndSeek.instance)
-                        .open((Player) e.getWhoClicked());                                                   //opens the GUI for the player provided
+                        .open((Player) e.getWhoClicked());
+                ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
+                new ConfigManager().writeToArenaFile();
+                ConfigurationSection arenaSection = parentSection.getConfigurationSection(arenaname);
+
+                //TODO: fix error -> arenaSection.set(newArenaName, arenaSection.getValues(true));
+                newArenaName = null;
+                try {
+                    ConfigManager.arenas.save(ConfigManager.arenasFile);
+                } catch (IOException error) {
+                    error.printStackTrace();
+                }
                 break;
         }
     }
