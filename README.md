@@ -1,4 +1,4 @@
-# Hide and Seek - Plugin by Ragy 🔴
+# Hide and Seek - Plugin by Ragy - Development has been paused!
 Basic and simple minecraft hide and seek plugin
 
   | 🟠 = Plugin is in beta         |
