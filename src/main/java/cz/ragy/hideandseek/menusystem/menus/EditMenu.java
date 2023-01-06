@@ -1,10 +1,7 @@
 package cz.ragy.hideandseek.menusystem.menus;
 
 import cz.ragy.hideandseek.HideAndSeek;
-import cz.ragy.hideandseek.listeners.ChatReader;
-import cz.ragy.hideandseek.listeners.ChatEvent;
 import cz.ragy.hideandseek.managers.ConfigManager;
-import cz.ragy.hideandseek.managers.MessageManager;
 import cz.ragy.hideandseek.menusystem.Menu;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
 import cz.ragy.hideandseek.utilities.Colors;
@@ -15,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.util.ArrayList;
