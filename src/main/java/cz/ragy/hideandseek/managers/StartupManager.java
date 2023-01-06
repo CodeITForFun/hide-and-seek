@@ -60,4 +60,3 @@ public class StartupManager {
                 "\n\n\n");
     }
 }
-
