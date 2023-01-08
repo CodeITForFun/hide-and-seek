@@ -63,4 +63,14 @@ public class ArenaManager {
             error.printStackTrace();
         }
     }
+    public void changeArenaWorld(String arenaName, String world) {
+        ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
+        ConfigurationSection arena = parentSection.getConfigurationSection(arenaName);
+        arena.set("ArenaWorld", world);
+        try {
+            ConfigManager.arenas.save(ConfigManager.arenasFile);
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
+    }
 }

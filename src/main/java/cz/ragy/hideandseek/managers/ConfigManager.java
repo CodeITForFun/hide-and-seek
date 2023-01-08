@@ -117,4 +117,10 @@ public class ConfigManager {
     public String getStringFromConfig(String string) {
         return config.getString(string);
     }
+    public void reloadConfigs() {
+        File arenaFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
+        arenas = YamlConfiguration.loadConfiguration(arenaFile);
+        File cfgFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
+        config = YamlConfiguration.loadConfiguration(cfgFile);
+    }
 }

@@ -7,6 +7,7 @@ import cz.ragy.hideandseek.menusystem.Menu;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
 import cz.ragy.hideandseek.utilities.Colors;
 import cz.ragy.hideandseek.utilities.Digit;
+import games.negative.framework.gui.SignGUI;
 import net.wesjd.anvilgui.AnvilGUI;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -85,6 +86,22 @@ public class EditMenu extends Menu {
                         .plugin(HideAndSeek.instance)
                         .open((Player) e.getWhoClicked());
                 break;
+            case END_PORTAL_FRAME:
+                new AnvilGUI.Builder()
+                        .onClose(player -> {
+                            player.sendMessage("You closed the inventory.");
+                        })
+                        .onComplete((completion) -> {
+                            new ArenaManager().changeArenaWorld(arenaname, completion.getText());
+                            return Arrays.asList(AnvilGUI.ResponseAction.close());
+                        })
+                        .preventClose()
+                        .text("Arena world")
+                        .itemLeft(new ItemStack(Material.BEACON))
+                        .title("Editing arena world")
+                        .plugin(HideAndSeek.instance)
+                        .open((Player) e.getWhoClicked());
+                break;
         }
     }
 
@@ -92,24 +109,33 @@ public class EditMenu extends Menu {
     public void setMenuItems() {
         ItemStack sign = new ItemStack(Material.OAK_SIGN);
         ItemStack beacon = new ItemStack(Material.BEACON);
+        ItemStack end = new ItemStack(Material.END_PORTAL_FRAME);
 
         ItemMeta signItemMeta = sign.getItemMeta();
         ItemMeta beaconItemMeta = beacon.getItemMeta();
+        ItemMeta endItemMeta = end.getItemMeta();
 
         ArrayList<String> signLore = new ArrayList<>();
         ArrayList<String> beaconLore = new ArrayList<>();
+        ArrayList<String> endLore = new ArrayList<>();
 
-        signLore.add(Colors.translate("&7Edits the arena name"));
+        signLore.add(Colors.translate("&7Arena Name"));
         signItemMeta.setDisplayName(Colors.translate("&cEdit arena name"));
         signItemMeta.setLore(signLore);
         sign.setItemMeta(signItemMeta);
 
-        beaconLore.add(Colors.translate("&7 Edits the max players count"));
+        beaconLore.add(Colors.translate("&7Max Players"));
         beaconItemMeta.setDisplayName(Colors.translate("&cEdit max player count"));
         beaconItemMeta.setLore(beaconLore);
         beacon.setItemMeta(beaconItemMeta);
 
+        endLore.add(Colors.translate("&7Arena World"));
+        endItemMeta.setDisplayName(Colors.translate("&cEdits the arena world name"));
+        endItemMeta.setLore(endLore);
+        end.setItemMeta(endItemMeta);
+
         inventory.setItem(13, sign);
         inventory.setItem(11, beacon);
+        inventory.setItem(9, end);
     }
 }
