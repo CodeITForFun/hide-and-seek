@@ -73,7 +73,7 @@ public class EditMenu extends Menu {
                         })
                         .onComplete((completion) -> {
                             if(new Digit().containsDigits(completion.getText())) {
-                                new ArenaManager().changeArenaMaxPlayers(arenaname, Integer.parseInt(completion.getText()));
+                                new ArenaManager().changeArenaMaxPlayers(arenaname, Long.parseLong(completion.getText()));
                                 return Arrays.asList(AnvilGUI.ResponseAction.close());
                             } else {
                                 completion.getPlayer().sendMessage("You need to use number input and not text input!");
@@ -110,7 +110,7 @@ public class EditMenu extends Menu {
                         })
                         .onComplete((completion) -> {
                             if(new Digit().containsDigits(completion.getText())) {
-                                new ArenaManager().changeMinPlayers(arenaname, Integer.parseInt(completion.getText()));
+                                new ArenaManager().changeMinPlayers(arenaname, Long.parseLong(completion.getText()));
                                 return Arrays.asList(AnvilGUI.ResponseAction.close());
                             } else {
                                 completion.getPlayer().sendMessage("You need to use number input and not text input!");
@@ -131,7 +131,7 @@ public class EditMenu extends Menu {
                         })
                         .onComplete((completion) -> {
                             if(new Digit().containsDigits(completion.getText())) {
-                                new ArenaManager().changeSeekersCount(arenaname, Integer.parseInt(completion.getText()));
+                                new ArenaManager().changeSeekersCount(arenaname, Long.parseLong(completion.getText()));
                                 return Arrays.asList(AnvilGUI.ResponseAction.close());
                             } else {
                                 completion.getPlayer().sendMessage("You need to use number input and not text input!");

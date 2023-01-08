@@ -53,7 +53,7 @@ public class ArenaManager {
         }
         new ConfigManager().startup();
     }
-    public void changeArenaMaxPlayers(String arenaName, Integer maxPlayers) {
+    public void changeArenaMaxPlayers(String arenaName, Long maxPlayers) {
         ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
         ConfigurationSection arena = parentSection.getConfigurationSection(arenaName);
         arena.set("ArenaMaxPlayers", maxPlayers);
@@ -73,7 +73,7 @@ public class ArenaManager {
             error.printStackTrace();
         }
     }
-    public void changeMinPlayers(String arenaName, Integer minPlayers) {
+    public void changeMinPlayers(String arenaName, Long minPlayers) {
         ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
         ConfigurationSection arena = parentSection.getConfigurationSection(arenaName);
         arena.set("ArenaMinPlayers", minPlayers);
@@ -83,7 +83,7 @@ public class ArenaManager {
             error.printStackTrace();
         }
     }
-    public void changeSeekersCount(String arenaName, Integer seekers) {
+    public void changeSeekersCount(String arenaName, Long seekers) {
         ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
         ConfigurationSection arena = parentSection.getConfigurationSection(arenaName);
         arena.set("ArenaSeekersCount", seekers);
