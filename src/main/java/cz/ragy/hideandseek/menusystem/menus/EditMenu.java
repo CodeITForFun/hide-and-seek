@@ -52,6 +52,10 @@ public class EditMenu extends Menu {
                             newArenaName = completion.getText();
                             completion.getPlayer().sendMessage(newArenaName);
                             completion.getPlayer().sendMessage(arenaname);
+
+                            new ConfigManager().writeToArenaFile();
+                            new ArenaManager().renameArena(arenaname, newArenaName);
+                            newArenaName = null;
                             return Arrays.asList(AnvilGUI.ResponseAction.close());
                         })
                         .preventClose()
@@ -60,15 +64,6 @@ public class EditMenu extends Menu {
                         .title("Editing Arena Name")
                         .plugin(HideAndSeek.instance)
                         .open((Player) e.getWhoClicked());
-
-                new ConfigManager().writeToArenaFile();
-                new ArenaManager().renameArena(arenaname, newArenaName);
-                try {
-                    ConfigManager.arenas.save(ConfigManager.arenasFile);
-                } catch (IOException error) {
-                    error.printStackTrace();
-                }
-                newArenaName = null;
                 break;
         }
     }

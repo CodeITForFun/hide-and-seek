@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +35,24 @@ public class ArenaManager {
         return arenas;
     }
     public void renameArena(String oldName, String newName) {
-        for (String s : ConfigManager.arenas.getConfigurationSection("arenas." + oldName).getKeys(false)) {
-            ConfigManager.arenas.set("arenas." + newName + "." + s, ConfigManager.arenas.get("arenas." + newName + "."+s));
-        }
 
+        ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
+        ConfigurationSection childSection = parentSection.getConfigurationSection(oldName);
+        ConfigurationSection childNewSection = parentSection.createSection(newName);
+        List<Object> stuff = new ArrayList<>();
+
+        if (parentSection.getConfigurationSection(oldName) == null)  return;
+
+        childNewSection.set("ArenaWorld", childSection.get("ArenaWorld"));
+        childNewSection.set("ArenaMaxPlayers", childSection.get("ArenaMaxPlayers"));
+        childNewSection.set("ArenaMinPlayers", childSection.get("ArenaMinPlayers"));
+        childNewSection.set("ArenaSeekersCount", childSection.get("ArenaSeekersCount"));
+
+        parentSection.set(oldName, null);
+        try {
+            ConfigManager.arenas.save(ConfigManager.arenasFile);
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
     }
 }
