@@ -2,7 +2,6 @@ package cz.ragy.hideandseek.managers;
 
 import cz.ragy.hideandseek.commands.MainCommand;
 import cz.ragy.hideandseek.HideAndSeek;
-import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -10,8 +9,6 @@ import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
-
-import static org.bukkit.Bukkit.getServer;
 
 public class StartupManager {
     public void startup(Server server, Plugin plugin, HideAndSeek instance){

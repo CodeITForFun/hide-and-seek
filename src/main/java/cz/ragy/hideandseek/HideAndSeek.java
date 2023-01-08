@@ -9,12 +9,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 import static org.bukkit.Bukkit.getPluginManager;
 
 public final class HideAndSeek extends BasePlugin {
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
+    public List<UUID> buildPlayers = new ArrayList<>();
     public static HideAndSeek instance;
     @Override
     public void onEnable() {
