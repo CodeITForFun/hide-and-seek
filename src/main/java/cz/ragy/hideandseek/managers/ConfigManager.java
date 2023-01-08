@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ConfigManager {
-    public static final File configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
-    public static final File arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
+    public static File configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
+    public static File arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
     public FileConfiguration confik = YamlConfiguration.loadConfiguration(configFile);
     public static YamlConfiguration arenas;
     public static YamlConfiguration config;

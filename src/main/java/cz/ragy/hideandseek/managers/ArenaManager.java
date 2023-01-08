@@ -35,7 +35,6 @@ public class ArenaManager {
         return arenas;
     }
     public void renameArena(String oldName, String newName) {
-
         ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
         ConfigurationSection childSection = parentSection.getConfigurationSection(oldName);
         ConfigurationSection childNewSection = parentSection.createSection(newName);
@@ -54,5 +53,6 @@ public class ArenaManager {
         } catch (IOException error) {
             error.printStackTrace();
         }
+        new ConfigManager().startup();
     }
 }

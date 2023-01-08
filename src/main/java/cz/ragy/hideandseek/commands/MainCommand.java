@@ -163,13 +163,14 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                     arguments.add("lobby");
                     return arguments;
                 case "editarena":
+                    File arenaFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
+                    YamlConfiguration arena = YamlConfiguration.loadConfiguration(arenaFile);
                     List<String> arenaList = new ArrayList<>();
-                    if(ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false) == null){
+                    if(arena.getConfigurationSection("arenas").getKeys(false) == null){
                         return arenaList;
                     } else {
-                    for (String key : arenas.getConfigurationSection("arenas").getKeys(false)) {
+                    for (String key : arena.getConfigurationSection("arenas").getKeys(false)) {
                         arenaList.add(key);
-                        return arenaList;
                         }
                     }
                     return arenaList;
