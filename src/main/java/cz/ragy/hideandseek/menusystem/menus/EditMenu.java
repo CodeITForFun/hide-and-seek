@@ -124,6 +124,27 @@ public class EditMenu extends Menu {
                         .plugin(HideAndSeek.instance)
                         .open((Player) e.getWhoClicked());
                 break;
+            case DIAMOND_SWORD:
+                new AnvilGUI.Builder()
+                        .onClose(player -> {
+                            player.sendMessage("You closed the inventory.");
+                        })
+                        .onComplete((completion) -> {
+                            if(new Digit().containsDigits(completion.getText())) {
+                                new ArenaManager().changeSeekersCount(arenaname, Integer.parseInt(completion.getText()));
+                                return Arrays.asList(AnvilGUI.ResponseAction.close());
+                            } else {
+                                completion.getPlayer().sendMessage("You need to use number input and not text input!");
+                                return Arrays.asList(AnvilGUI.ResponseAction.close());
+                            }
+                        })
+                        .preventClose()
+                        .text("Arena seekers count")
+                        .itemLeft(new ItemStack(Material.DIAMOND_SWORD))
+                        .title("Editing arena seekers count")
+                        .plugin(HideAndSeek.instance)
+                        .open((Player) e.getWhoClicked());
+                break;
         }
     }
 
@@ -133,16 +154,19 @@ public class EditMenu extends Menu {
         ItemStack beacon = new ItemStack(Material.BEACON);
         ItemStack end = new ItemStack(Material.END_PORTAL_FRAME);
         ItemStack bell = new ItemStack(Material.BELL);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
 
         ItemMeta signItemMeta = sign.getItemMeta();
         ItemMeta beaconItemMeta = beacon.getItemMeta();
         ItemMeta endItemMeta = end.getItemMeta();
         ItemMeta bellMeta = bell.getItemMeta();
+        ItemMeta swordMeta = sword.getItemMeta();
 
         ArrayList<String> signLore = new ArrayList<>();
         ArrayList<String> beaconLore = new ArrayList<>();
         ArrayList<String> endLore = new ArrayList<>();
         ArrayList<String> bellLore = new ArrayList<>();
+        ArrayList<String> swordLore = new ArrayList<>();
 
         signLore.add(Colors.translate("&7Arena Name"));
         signItemMeta.setDisplayName(Colors.translate("&cEdit arena name"));
@@ -164,9 +188,15 @@ public class EditMenu extends Menu {
         bellMeta.setLore(bellLore);
         bell.setItemMeta(bellMeta);
 
+        swordLore.add(Colors.translate("&7Seekers count"));
+        swordMeta.setDisplayName(Colors.translate("&cEdit the seekers count"));
+        swordMeta.setLore(swordLore);
+        sword.setItemMeta(swordMeta);
+
         inventory.setItem(13, sign);
         inventory.setItem(11, beacon);
         inventory.setItem(9, end);
         inventory.setItem(15, bell);
+        inventory.setItem(17, sword);
     }
 }

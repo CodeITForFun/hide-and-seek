@@ -83,4 +83,14 @@ public class ArenaManager {
             error.printStackTrace();
         }
     }
+    public void changeSeekersCount(String arenaName, Integer seekers) {
+        ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
+        ConfigurationSection arena = parentSection.getConfigurationSection(arenaName);
+        arena.set("ArenaSeekersCount", seekers);
+        try {
+            ConfigManager.arenas.save(ConfigManager.arenasFile);
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
+    }
 }
