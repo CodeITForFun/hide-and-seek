@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
+
+    public static final File arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
+    public YamlConfiguration arenas = new YamlConfiguration().loadConfiguration(arenasFile);
     public String prefix = (String) ConfigManager.config.get("Core.Prefix");
     public String noPerms = (String) ConfigManager.config.get("Core.No-Permission");
     public String invalidMessage = (String) ConfigManager.config.get("Create-Arena.Invalid-Message");
@@ -164,7 +167,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                     if(ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false) == null){
                         return arenaList;
                     } else {
-                    for (String key : ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false)) {
+                    for (String key : arenas.getConfigurationSection("arenas").getKeys(false)) {
                         arenaList.add(key);
                         return arenaList;
                         }

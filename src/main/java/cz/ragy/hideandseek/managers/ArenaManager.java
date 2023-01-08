@@ -33,4 +33,10 @@ public class ArenaManager {
     public List<Arena> getListOfArenas() {
         return arenas;
     }
+    public void renameArena(String oldName, String newName) {
+        for (String s : ConfigManager.arenas.getConfigurationSection("arenas." + oldName).getKeys(false)) {
+            ConfigManager.arenas.set("arenas." + newName + "." + s, ConfigManager.arenas.get("arenas." + newName + "."+s));
+        }
+
+    }
 }

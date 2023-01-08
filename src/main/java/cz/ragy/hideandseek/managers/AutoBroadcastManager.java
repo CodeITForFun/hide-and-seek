@@ -27,7 +27,6 @@ public class AutoBroadcastManager extends BukkitRunnable {
     @Override
     public void run() {
         String message = "";
-
         if (!random)
         {
             try

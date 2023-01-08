@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ConfigManager {
     public static final File configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
@@ -70,7 +71,6 @@ public class ConfigManager {
 
     public void editArena(String arenaName, String whatToEdit, String toWhat) {
         ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
-        List<String> strList = new ArrayList<>();
         for (String key : ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false)) {
             if(key != arenaName) {
                 System.out.println("err");
@@ -80,6 +80,17 @@ public class ConfigManager {
                 childSection.set(whatToEdit, toWhat);
             }
         }
+    }
+    public void editArenaName(String arenaName, String arenaNewName) {
+        ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
+        ConfigurationSection oldSection = config.getConfigurationSection(arenaName);
+
+        if (oldSection == null) {
+            return;
+        }
+        Map<String, Object> values = oldSection.getValues(true);
+        parentSection.set(arenaNewName, null);
+        parentSection.createSection(arenaNewName, values);
     }
     public void reloadAllConfigs(){
         Bukkit.getPluginManager().disablePlugin(HideAndSeek.instance);

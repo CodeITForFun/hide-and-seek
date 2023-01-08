@@ -1,6 +1,7 @@
 package cz.ragy.hideandseek.menusystem.menus;
 
 import cz.ragy.hideandseek.HideAndSeek;
+import cz.ragy.hideandseek.managers.ArenaManager;
 import cz.ragy.hideandseek.managers.ConfigManager;
 import cz.ragy.hideandseek.menusystem.Menu;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
@@ -48,8 +49,9 @@ public class EditMenu extends Menu {
                             player.sendMessage("You closed the inventory.");
                         })
                         .onComplete((completion) -> {
-                            completion.getPlayer().sendMessage(completion.getText());
                             newArenaName = completion.getText();
+                            completion.getPlayer().sendMessage(newArenaName);
+                            completion.getPlayer().sendMessage(arenaname);
                             return Arrays.asList(AnvilGUI.ResponseAction.close());
                         })
                         .preventClose()
@@ -58,17 +60,15 @@ public class EditMenu extends Menu {
                         .title("Editing Arena Name")
                         .plugin(HideAndSeek.instance)
                         .open((Player) e.getWhoClicked());
-                ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
-                new ConfigManager().writeToArenaFile();
-                ConfigurationSection arenaSection = parentSection.getConfigurationSection(arenaname);
 
-                //TODO: fix error -> arenaSection.set(newArenaName, arenaSection.getValues(true));
-                newArenaName = null;
+                new ConfigManager().writeToArenaFile();
+                new ArenaManager().renameArena(arenaname, newArenaName);
                 try {
                     ConfigManager.arenas.save(ConfigManager.arenasFile);
                 } catch (IOException error) {
                     error.printStackTrace();
                 }
+                newArenaName = null;
                 break;
         }
     }
