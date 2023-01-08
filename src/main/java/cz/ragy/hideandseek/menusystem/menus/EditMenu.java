@@ -6,6 +6,7 @@ import cz.ragy.hideandseek.managers.ConfigManager;
 import cz.ragy.hideandseek.menusystem.Menu;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
 import cz.ragy.hideandseek.utilities.Colors;
+import cz.ragy.hideandseek.utilities.Digit;
 import net.wesjd.anvilgui.AnvilGUI;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -50,8 +51,6 @@ public class EditMenu extends Menu {
                         })
                         .onComplete((completion) -> {
                             newArenaName = completion.getText();
-                            completion.getPlayer().sendMessage(newArenaName);
-                            completion.getPlayer().sendMessage(arenaname);
 
                             new ConfigManager().writeToArenaFile();
                             new ArenaManager().renameArena(arenaname, newArenaName);
@@ -65,19 +64,52 @@ public class EditMenu extends Menu {
                         .plugin(HideAndSeek.instance)
                         .open((Player) e.getWhoClicked());
                 break;
+            case BEACON:
+                new AnvilGUI.Builder()
+                        .onClose(player -> {
+                            player.sendMessage("You closed the inventory.");
+                        })
+                        .onComplete((completion) -> {
+                            if(new Digit().containsDigits(completion.getText())) {
+                                new ArenaManager().changeArenaMaxPlayers(arenaname, Integer.parseInt(completion.getText()));
+                                return Arrays.asList(AnvilGUI.ResponseAction.close());
+                            } else {
+                                completion.getPlayer().sendMessage("You need to use number input and not text input!");
+                                return Arrays.asList(AnvilGUI.ResponseAction.close());
+                            }
+                        })
+                        .preventClose()
+                        .text("Max players")
+                        .itemLeft(new ItemStack(Material.BEACON))
+                        .title("Editing max players count")
+                        .plugin(HideAndSeek.instance)
+                        .open((Player) e.getWhoClicked());
+                break;
         }
     }
 
     @Override
     public void setMenuItems() {
         ItemStack sign = new ItemStack(Material.OAK_SIGN);
+        ItemStack beacon = new ItemStack(Material.BEACON);
+
         ItemMeta signItemMeta = sign.getItemMeta();
-        ArrayList<String> signLore = new ArrayList<String>();
+        ItemMeta beaconItemMeta = beacon.getItemMeta();
+
+        ArrayList<String> signLore = new ArrayList<>();
+        ArrayList<String> beaconLore = new ArrayList<>();
+
         signLore.add(Colors.translate("&7Edits the arena name"));
-        signItemMeta.setDisplayName("&cEdit arena name");
-        sign.setItemMeta(signItemMeta);
+        signItemMeta.setDisplayName(Colors.translate("&cEdit arena name"));
         signItemMeta.setLore(signLore);
+        sign.setItemMeta(signItemMeta);
+
+        beaconLore.add(Colors.translate("&7 Edits the max players count"));
+        beaconItemMeta.setDisplayName(Colors.translate("&cEdit max player count"));
+        beaconItemMeta.setLore(beaconLore);
+        beacon.setItemMeta(beaconItemMeta);
 
         inventory.setItem(13, sign);
+        inventory.setItem(11, beacon);
     }
 }

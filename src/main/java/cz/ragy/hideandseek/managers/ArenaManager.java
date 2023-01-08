@@ -38,8 +38,6 @@ public class ArenaManager {
         ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
         ConfigurationSection childSection = parentSection.getConfigurationSection(oldName);
         ConfigurationSection childNewSection = parentSection.createSection(newName);
-        List<Object> stuff = new ArrayList<>();
-
         if (parentSection.getConfigurationSection(oldName) == null)  return;
 
         childNewSection.set("ArenaWorld", childSection.get("ArenaWorld"));
@@ -54,5 +52,15 @@ public class ArenaManager {
             error.printStackTrace();
         }
         new ConfigManager().startup();
+    }
+    public void changeArenaMaxPlayers(String arenaName, Integer maxPlayers) {
+        ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
+        ConfigurationSection arena = parentSection.getConfigurationSection(arenaName);
+        arena.set("ArenaMaxPlayers", maxPlayers);
+        try {
+            ConfigManager.arenas.save(ConfigManager.arenasFile);
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
     }
 }
