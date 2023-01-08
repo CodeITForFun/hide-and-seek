@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -102,6 +103,27 @@ public class EditMenu extends Menu {
                         .plugin(HideAndSeek.instance)
                         .open((Player) e.getWhoClicked());
                 break;
+            case BELL:
+                new AnvilGUI.Builder()
+                        .onClose(player -> {
+                            player.sendMessage("You closed the inventory.");
+                        })
+                        .onComplete((completion) -> {
+                            if(new Digit().containsDigits(completion.getText())) {
+                                new ArenaManager().changeMinPlayers(arenaname, Integer.parseInt(completion.getText()));
+                                return Arrays.asList(AnvilGUI.ResponseAction.close());
+                            } else {
+                                completion.getPlayer().sendMessage("You need to use number input and not text input!");
+                                return Arrays.asList(AnvilGUI.ResponseAction.close());
+                            }
+                        })
+                        .preventClose()
+                        .text("Arena min players")
+                        .itemLeft(new ItemStack(Material.BELL))
+                        .title("Editing arena min players")
+                        .plugin(HideAndSeek.instance)
+                        .open((Player) e.getWhoClicked());
+                break;
         }
     }
 
@@ -110,14 +132,17 @@ public class EditMenu extends Menu {
         ItemStack sign = new ItemStack(Material.OAK_SIGN);
         ItemStack beacon = new ItemStack(Material.BEACON);
         ItemStack end = new ItemStack(Material.END_PORTAL_FRAME);
+        ItemStack bell = new ItemStack(Material.BELL);
 
         ItemMeta signItemMeta = sign.getItemMeta();
         ItemMeta beaconItemMeta = beacon.getItemMeta();
         ItemMeta endItemMeta = end.getItemMeta();
+        ItemMeta bellMeta = bell.getItemMeta();
 
         ArrayList<String> signLore = new ArrayList<>();
         ArrayList<String> beaconLore = new ArrayList<>();
         ArrayList<String> endLore = new ArrayList<>();
+        ArrayList<String> bellLore = new ArrayList<>();
 
         signLore.add(Colors.translate("&7Arena Name"));
         signItemMeta.setDisplayName(Colors.translate("&cEdit arena name"));
@@ -130,12 +155,18 @@ public class EditMenu extends Menu {
         beacon.setItemMeta(beaconItemMeta);
 
         endLore.add(Colors.translate("&7Arena World"));
-        endItemMeta.setDisplayName(Colors.translate("&cEdits the arena world name"));
+        endItemMeta.setDisplayName(Colors.translate("&cEdit the arena world name"));
         endItemMeta.setLore(endLore);
         end.setItemMeta(endItemMeta);
+
+        bellLore.add(Colors.translate("&7Min players"));
+        bellMeta.setDisplayName(Colors.translate("&cEdit the min players"));
+        bellMeta.setLore(bellLore);
+        bell.setItemMeta(bellMeta);
 
         inventory.setItem(13, sign);
         inventory.setItem(11, beacon);
         inventory.setItem(9, end);
+        inventory.setItem(15, bell);
     }
 }
