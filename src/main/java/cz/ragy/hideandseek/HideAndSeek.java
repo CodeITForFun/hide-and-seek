@@ -1,9 +1,13 @@
 package cz.ragy.hideandseek;
 
+import cz.ragy.hideandseek.commands.TestCmd;
 import cz.ragy.hideandseek.managers.StartupManager;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
 import games.negative.framework.BasePlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -20,6 +24,7 @@ public final class HideAndSeek extends BasePlugin {
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
     public List<UUID> buildPlayers = new ArrayList<>();
     public static HideAndSeek instance;
+    public FallingBlock fallingBlock;
     @Override
     public void onEnable() {
         instance = this;
@@ -28,6 +33,7 @@ public final class HideAndSeek extends BasePlugin {
         Plugin placeholderAPI = getPluginManager().getPlugin("PlaceholderAPI");
         if (placeholderAPI != null && placeholderAPI.isEnabled()) {
             new StartupManager().startup(getServer(), this, this);
+            registerCommands(new TestCmd());
         } else {
             getLogger().warning("Please install and enable PlaceholderAPI for the Hide And Seek Plugin to work.");
             getPluginManager().disablePlugin(this);

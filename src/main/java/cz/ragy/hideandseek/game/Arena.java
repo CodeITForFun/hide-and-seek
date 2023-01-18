@@ -1,5 +1,6 @@
 package cz.ragy.hideandseek.game;
 
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class Arena {
     public int hidersCount;
     private List<Player> arenaPlayers;
     private boolean playing;
+    private List<FallingBlock> arenaBlocks;
 
     public Arena(String arenaName, String arenaWorldName, Integer maxPlayers, Integer minPlayers, Integer seekersCount){
         this.arenaName = arenaName;
@@ -30,5 +32,8 @@ public class Arena {
     }
     public void setPlaying(boolean p){
         this.playing = p;
+    }
+    public void addArenablock(FallingBlock block) {
+        arenaBlocks.add(block);
     }
 }
