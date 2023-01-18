@@ -174,6 +174,18 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         }
                     }
                     return arenaList;
+                case "joinarena":
+                    File arenaFilee = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
+                    YamlConfiguration arenaa = YamlConfiguration.loadConfiguration(arenaFilee);
+                    List<String> arenaListt = new ArrayList<>();
+                    if(arenaa.getConfigurationSection("arenas").getKeys(false) == null){
+                        return arenaListt;
+                    } else {
+                        for (String key : arenaa.getConfigurationSection("arenas").getKeys(false)) {
+                            arenaListt.add(key);
+                        }
+                    }
+                    return arenaListt;
             }
         }
         return null;

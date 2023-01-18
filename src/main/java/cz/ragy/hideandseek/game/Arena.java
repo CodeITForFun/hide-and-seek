@@ -1,5 +1,6 @@
 package cz.ragy.hideandseek.game;
 
+import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 
@@ -14,7 +15,7 @@ public class Arena {
     public int hidersCount;
     private List<Player> arenaPlayers;
     private boolean playing;
-    private List<FallingBlock> arenaBlocks;
+    private List<MiscDisguise> disguises;
 
     public Arena(String arenaName, String arenaWorldName, Integer maxPlayers, Integer minPlayers, Integer seekersCount){
         this.arenaName = arenaName;
@@ -33,7 +34,7 @@ public class Arena {
     public void setPlaying(boolean p){
         this.playing = p;
     }
-    public void addArenablock(FallingBlock block) {
-        arenaBlocks.add(block);
+    public void addArenablock(MiscDisguise disg) {
+        disguises.add(disg);
     }
 }
