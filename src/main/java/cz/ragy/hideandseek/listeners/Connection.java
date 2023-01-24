@@ -2,6 +2,7 @@ package cz.ragy.hideandseek.listeners;
 
 import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.managers.ConfigManager;
+import cz.ragy.hideandseek.managers.MessageManager;
 import cz.ragy.hideandseek.utilities.Colors;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -38,22 +39,11 @@ public class Connection implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
+        event.setJoinMessage("gujrsgujrsng");
         Player player = event.getPlayer();
         if(tpOnJoin) {
             World world = Bukkit.getWorld(worldName);
             player.teleport(new Location(world, onJoinX, onJoinY, onJoinZ, (float) onJoinYaw, (float) onJoinPitch));
-        } else
-        if(gvCompass) {
-            ItemStack item = new ItemStack(Material.matchMaterial(cmpsItem.toUpperCase()));
-            ItemMeta itemMeta = item.getItemMeta();
-            itemMeta.setDisplayName(Colors.translate(cmpsName));
-            List<String> jasny = new ArrayList<>();
-            cmpsLore.forEach(lor -> {
-                jasny.add(Colors.translate(lor));
-            });
-            itemMeta.setLore(jasny);
-            item.setItemMeta(itemMeta);
-            event.getPlayer().getInventory().setItem(cmpsSlot - 1, item);
         }
     }
 }
