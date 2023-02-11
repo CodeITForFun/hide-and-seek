@@ -31,13 +31,13 @@ import static org.bukkit.Bukkit.getServer;
             disabled = false,
             args = {"block"})
 public class TestCmd extends Command {
-    private FallingBlock fallingBlock;
         @Override
         public void onCommand(CommandSender sender, String[] args) {
             if(Material.matchMaterial(args[0].toUpperCase()) != null){
                 Player player = (Player) sender;
                 Material mat = Material.matchMaterial(args[0].toUpperCase());
                 ItemStack item = new ItemStack(mat);
+
                 MiscDisguise miscDisguise = new MiscDisguise(DisguiseType.FALLING_BLOCK, item.getType());
                 miscDisguise.setEntity(player);
                 miscDisguise.setNotifyBar(null);

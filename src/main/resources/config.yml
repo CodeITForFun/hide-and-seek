@@ -16,7 +16,7 @@
 
 Core:
   No-Permission: "&c You don't have permissions." # Message displayed when a player does not have permission to use a command
-  Prefix: "&8[&e&lH&e&r&e&&e&lS&8] &7>> &r" # Prefix for all messages from this plugin
+  Prefix: "&8[&e&lH&e&r&e&l&e&lS&8] &7>> &r" # Prefix for all messages from this plugin
   notEntity: "chod na server" # Message displayed when a player is not targeting a valid entity
 
 Lobby:
@@ -35,7 +35,8 @@ Lobby:
 Reload:
   Reload-Message: "&cPlease wait, reloading plugin!"
   Successfully-Reloaded: "&aFiles arenas.yml, config.yml has beed reloaded!"
-Items:
+ArenaSelector:
+  arenaSelectorTitle: "&cArena selector"
   arenaSelectorEnabled: true
   arenaSelectorItemName: "&cArena Selector"
   arenaSelectorItemType: "compass"

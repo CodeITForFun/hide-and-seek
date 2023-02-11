@@ -3,6 +3,7 @@ package cz.ragy.hideandseek.managers;
 import com.sun.org.apache.xerces.internal.xs.StringList;
 import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.HideAndSeek;
+import cz.ragy.hideandseek.utilities.Colors;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
@@ -49,17 +50,22 @@ public class ConfigManager {
                 childSection.set("ArenaMaxPlayers", arena.maxPlayers);
                 childSection.set("ArenaMinPlayers", arena.minPlayers);
                 childSection.set("ArenaSeekersCount", arena.seekersCount);
-
-                sender.sendMessage("Arena: " + arena.arenaName);
-                sender.sendMessage("World: " + arena.arenaWorldName);
-                sender.sendMessage("Max Players: " + arena.maxPlayers);
-                sender.sendMessage("Min Players: " + arena.minPlayers);
-                sender.sendMessage("Seekers: " + arena.seekersCount);
-                sender.sendMessage(creating);
-                sender.sendMessage(setArena);
+                for(int i = 0; i > 10; i++){
+                    sender.sendMessage("");
+                }
+                sender.sendMessage(Colors.translate("&7&m----------------"));
+                sender.sendMessage(Colors.translate("&cArena: " + arena.arenaName));
+                sender.sendMessage(Colors.translate("&cWorld: " + arena.arenaWorldName));
+                sender.sendMessage(Colors.translate("&cMax Players: " + arena.maxPlayers));
+                sender.sendMessage(Colors.translate("&cMin Players: " + arena.minPlayers));
+                sender.sendMessage(Colors.translate("&cSeekers: " + arena.seekersCount));
+                sender.sendMessage("");
+                sender.sendMessage(Colors.translate(creating));
+                sender.sendMessage(Colors.translate(setArena));
+                sender.sendMessage(Colors.translate("&7&m----------------"));
             } else {
-                sender.sendMessage(arenaExists);
-                continue;
+                sender.sendMessage(Colors.translate(arenaExists));
+                break;
             }
         }
         try {

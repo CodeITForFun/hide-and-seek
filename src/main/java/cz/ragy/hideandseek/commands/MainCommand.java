@@ -44,7 +44,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             if(args.length == 0) {
                 switch (command.getName()) {
                     case "has":
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("It works!")));
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("Help Message")));
                         break;
                 }
             }
@@ -60,16 +60,16 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + sucReloaded)));
                         break;
                     case "setup":
+                        if(!(sender.hasPermission("has.setup") || sender.hasPermission("has.*"))) { sender.sendMessage(prefix + noPerms); break; }
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("&7Hello, welcome to &eHide & Seek Plugin by Radekminecraft and FungY911.\nThis is Setup Wizard for this plugin.\n\nIf you need any help, you can join to [&9Discord server](https://discord.gg/EgqNXXcx2q)")));
                         //player.chat("/has setup lobby"); //automatically execute command
                         break;
                     default:
-                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("help message")));
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("Help Message")));
                 }
             }
             if(args.length == 2) {
                 if (!(sender.hasPermission("has.setLobby"))) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(noPerms))); return true; }
-
                 if(args[0].equals("setup")) {
                     if(args[1].equals("lobby")) {
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(lobbySet)));
@@ -113,12 +113,11 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         if (!player.hasPermission("has.createarena") || !sender.hasPermission("has.*")) { sender.sendMessage(Colors.translate(noPerms)); return true; }
                         Digit digit = new Digit();
 
-                        if( !(digit.containsDigits(args[2])) &&
+                        if(!(digit.containsDigits(args[2])) &&
                                 !(digit.containsDigits(args[3])) &&
                                 digit.containsDigits(args[4]) &&
                                 digit.containsDigits(args[5]) &&
-                                digit.containsDigits(args[6])){
-
+                                digit.containsDigits(args[6])) {
                             String arenaName = args[2];
                             String arenaWorldName = args[3];
                             int maxPlayers = Integer.parseInt(args[4]);
