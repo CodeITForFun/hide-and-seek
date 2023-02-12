@@ -4,14 +4,9 @@ import cz.ragy.hideandseek.commands.TestCmd;
 import cz.ragy.hideandseek.managers.StartupManager;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
 import games.negative.framework.BasePlugin;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +38,7 @@ public final class HideAndSeek extends BasePlugin {
     public void onDisable() {
         super.onDisable();
     }
+
     public static PlayerMenuUtility getPlayerMenuUtility(Player p) {
         PlayerMenuUtility playerMenuUtility;
         if (!(playerMenuUtilityMap.containsKey(p))) {
