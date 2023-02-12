@@ -2,6 +2,7 @@ package cz.ragy.hideandseek.menusystem.menus;
 
 import cz.ragy.hideandseek.managers.ConfigManager;
 import cz.ragy.hideandseek.menusystem.Menu;
+import cz.ragy.hideandseek.menusystem.PaginatedMenu;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
 import cz.ragy.hideandseek.utilities.Colors;
 import org.bukkit.Material;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 import static org.bukkit.Material.STONE;
 
-public class ArenaSelector extends Menu {
+public class ArenaSelector extends PaginatedMenu {
     public ArenaSelector(PlayerMenuUtility playerMenuUtility) {
         super(playerMenuUtility);
     }
@@ -25,7 +26,7 @@ public class ArenaSelector extends Menu {
 
     @Override
     public int getSlots() {
-        return 27;
+        return 54;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class ArenaSelector extends Menu {
         ArrayList<String> itemLore = new ArrayList<String>();
         itemMeta.setDisplayName("jozo");
         testItem.setItemMeta(itemMeta);
-
+        super.addMenuBorder();
         inventory.setItem(4, testItem);
     }
 }
