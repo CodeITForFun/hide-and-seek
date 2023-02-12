@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class MessageManager extends BukkitRunnable {
     private List<String> messages = ConfigManager.config.getStringList("Auto-Broadcast.messages");;
-    private boolean random = ConfigManager.config.getBoolean("random");;
+    private boolean random = ConfigManager.config.getBoolean("Auto-Broadcast.random");;
     private int lastMessage;
 
     @Override

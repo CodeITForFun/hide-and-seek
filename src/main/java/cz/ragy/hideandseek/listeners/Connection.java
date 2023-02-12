@@ -19,31 +19,46 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Connection implements Listener {
     public boolean tpOnJoin = ConfigManager.config.getBoolean("Lobby.onJoinLobby");
-    public boolean gvCompass = ConfigManager.config.getBoolean("Lobby.arenaSelectorEnabled");
+    public boolean gvCompass = ConfigManager.config.getBoolean("ArenaSelector.arenaSelectorEnabled");
+    public boolean clearInv = ConfigManager.config.getBoolean("Lobby.clearInventoryOnJoin");
+    public String joinMessage = ConfigManager.config.getString("Lobby.onJoinMessage");
     public double onJoinX = ConfigManager.config.getDouble("Lobby.onJoinX");
     public double onJoinY = ConfigManager.config.getDouble("Lobby.onJoinY");
     public double onJoinZ = ConfigManager.config.getDouble("Lobby.onJoinZ");
-
     public double onJoinPitch = ConfigManager.config.getDouble("Lobby.onJoinPitch");
     public double onJoinYaw = ConfigManager.config.getDouble("Lobby.onJoinYaw");
     public String worldName = ConfigManager.config.getString("Lobby.onJoinWorldName");
-
-    public String cmpsName = ConfigManager.config.getString("Lobby.arenaSelectorItemName");
-    public List<String> cmpsLore = ConfigManager.config.getStringList("Lobby.arenaSelectorItemLore");
-    public String cmpsItem = ConfigManager.config.getString("Lobby.arenaSelectorItemType");
-    public Integer cmpsSlot = ConfigManager.config.getInt("Lobby.arenaSelectorSlot");
+    public String cmpsName = ConfigManager.config.getString("ArenaSelector.arenaSelectorItemName");
+    public String cmpsItem = ConfigManager.config.getString("ArenaSelector.arenaSelectorItemType");
+    public Integer cmpsSlot = ConfigManager.config.getInt("ArenaSelector.arenaSelectorSlot");
+    public List<String> lore = ConfigManager.config.getStringList("ArenaSelector.arenaSelectorItemLore");
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        event.setJoinMessage("gujrsgujrsng");
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        joinMessage = joinMessage.replace("%player%", event.getPlayer().getName()).trim();
+        event.setJoinMessage(Colors.translate(joinMessage));
         Player player = event.getPlayer();
+        if (clearInv) player.getInventory().clear();
         if(tpOnJoin) {
             World world = Bukkit.getWorld(worldName);
             player.teleport(new Location(world, onJoinX, onJoinY, onJoinZ, (float) onJoinYaw, (float) onJoinPitch));
+        }
+        if(gvCompass) {
+            ItemStack neco = new ItemStack(Material.matchMaterial(cmpsItem.toUpperCase()));
+            ItemMeta necoMeta = neco.getItemMeta();
+            for (int i = 0; i < lore.size(); i++) {
+                String line = lore.get(i);
+                lore.set(i, Colors.translate(line));
+            }
+            necoMeta.setLore(lore);
+            necoMeta.setDisplayName(Colors.translate(cmpsName));
+            neco.setItemMeta(necoMeta);
+            player.getInventory().setItem(cmpsSlot, neco);
         }
     }
 }

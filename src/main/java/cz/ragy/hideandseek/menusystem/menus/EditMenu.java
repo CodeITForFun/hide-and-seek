@@ -35,7 +35,7 @@ public class EditMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return "Edit Arena " + arenaname;
+        return Colors.translate("&7Edit Arena " + arenaname);
     }
 
     @Override
@@ -48,15 +48,13 @@ public class EditMenu extends Menu {
         switch (e.getCurrentItem().getType()) {
             case OAK_SIGN:
                 new AnvilGUI.Builder()
-                        .onClose(player -> {
-                            player.sendMessage("You closed the inventory.");
-                        })
                         .onComplete((completion) -> {
                             newArenaName = completion.getText();
 
                             new ConfigManager().writeToArenaFile();
                             new ArenaManager().renameArena(arenaname, newArenaName);
                             newArenaName = null;
+                            completion.getPlayer().sendMessage(Colors.translate("Saving..."));
                             return Arrays.asList(AnvilGUI.ResponseAction.close());
                         })
                         .preventClose()
@@ -68,12 +66,10 @@ public class EditMenu extends Menu {
                 break;
             case BEACON:
                 new AnvilGUI.Builder()
-                        .onClose(player -> {
-                            player.sendMessage("You closed the inventory.");
-                        })
                         .onComplete((completion) -> {
                             if(new Digit().containsDigits(completion.getText())) {
                                 new ArenaManager().changeArenaMaxPlayers(arenaname, Long.parseLong(completion.getText()));
+                                completion.getPlayer().sendMessage(Colors.translate("Saving..."));
                                 return Arrays.asList(AnvilGUI.ResponseAction.close());
                             } else {
                                 completion.getPlayer().sendMessage("You need to use number input and not text input!");
@@ -89,52 +85,46 @@ public class EditMenu extends Menu {
                 break;
             case END_PORTAL_FRAME:
                 new AnvilGUI.Builder()
-                        .onClose(player -> {
-                            player.sendMessage("You closed the inventory.");
-                        })
                         .onComplete((completion) -> {
                             new ArenaManager().changeArenaWorld(arenaname, completion.getText());
+                            completion.getPlayer().sendMessage(Colors.translate("Saving..."));
                             return Arrays.asList(AnvilGUI.ResponseAction.close());
                         })
                         .preventClose()
                         .text("Arena world")
-                        .itemLeft(new ItemStack(Material.BEACON))
+                        .itemLeft(new ItemStack(Material.END_PORTAL_FRAME))
                         .title("Editing arena world")
                         .plugin(HideAndSeek.instance)
                         .open((Player) e.getWhoClicked());
                 break;
-            case BELL:
+            case APPLE:
                 new AnvilGUI.Builder()
-                        .onClose(player -> {
-                            player.sendMessage("You closed the inventory.");
-                        })
                         .onComplete((completion) -> {
                             if(new Digit().containsDigits(completion.getText())) {
                                 new ArenaManager().changeMinPlayers(arenaname, Long.parseLong(completion.getText()));
+                                completion.getPlayer().sendMessage(Colors.translate("Saving..."));
                                 return Arrays.asList(AnvilGUI.ResponseAction.close());
                             } else {
-                                completion.getPlayer().sendMessage("You need to use number input and not text input!");
+                                completion.getPlayer().sendMessage(Colors.translate("&cYou need to use number input and not text input!"));
                                 return Arrays.asList(AnvilGUI.ResponseAction.close());
                             }
                         })
                         .preventClose()
                         .text("Arena min players")
-                        .itemLeft(new ItemStack(Material.BELL))
+                        .itemLeft(new ItemStack(Material.APPLE))
                         .title("Editing arena min players")
                         .plugin(HideAndSeek.instance)
                         .open((Player) e.getWhoClicked());
                 break;
             case DIAMOND_SWORD:
                 new AnvilGUI.Builder()
-                        .onClose(player -> {
-                            player.sendMessage("You closed the inventory.");
-                        })
                         .onComplete((completion) -> {
                             if(new Digit().containsDigits(completion.getText())) {
                                 new ArenaManager().changeSeekersCount(arenaname, Long.parseLong(completion.getText()));
+                                completion.getPlayer().sendMessage(Colors.translate("Saving..."));
                                 return Arrays.asList(AnvilGUI.ResponseAction.close());
                             } else {
-                                completion.getPlayer().sendMessage("You need to use number input and not text input!");
+                                completion.getPlayer().sendMessage(Colors.translate("&cYou need to use number input and not text input!"));
                                 return Arrays.asList(AnvilGUI.ResponseAction.close());
                             }
                         })
@@ -153,7 +143,7 @@ public class EditMenu extends Menu {
         ItemStack sign = new ItemStack(Material.OAK_SIGN);
         ItemStack beacon = new ItemStack(Material.BEACON);
         ItemStack end = new ItemStack(Material.END_PORTAL_FRAME);
-        ItemStack bell = new ItemStack(Material.BELL);
+        ItemStack bell = new ItemStack(Material.APPLE);
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
 
         ItemMeta signItemMeta = sign.getItemMeta();
