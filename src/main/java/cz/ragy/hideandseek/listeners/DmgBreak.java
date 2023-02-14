@@ -22,7 +22,9 @@ public class DmgBreak implements Listener {
         World world = Bukkit.getWorld(worldName);
         if (event.getEntity() instanceof Player) {
             if (event.getEntity().getWorld().equals(world)) {
-                event.setCancelled(true);
+                if (((Player) event.getEntity()).getGameMode().name().matches("creative")) {
+                    event.setCancelled(true);
+                }
             }
         }
     }
