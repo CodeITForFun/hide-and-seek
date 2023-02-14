@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArenaManager {
-    public List<Arena> arenas = new ArrayList<Arena>();
+    public static List<Arena> arenas = new ArrayList<Arena>();
+
     public void addArenaToList(Arena arena, CommandSender sender){
         arenas.add(arena);
         new ConfigManager().saveArenasToConfig(arenas, sender);
@@ -21,15 +22,19 @@ public class ArenaManager {
         arenas.remove(arena);
     }
 
-    public List<String> getArenasKeysFromConfig(FileConfiguration arenaCconfiguration, File file) {
-        arenaCconfiguration = YamlConfiguration.loadConfiguration(file);
-        ConfigurationSection section = arenaCconfiguration.getConfigurationSection("arenas");
-        List<String> arenaList = new ArrayList<>();
+    public void loadArenas() {
+        //TODO: fix because i isnt a number but string
+        for(int i = 0; i < ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false).size(); i++) {
+            String arenaName = ConfigManager.arenas.getString("arenas." + i);
+            String worldName = ConfigManager.arenas.getString("arenas." + i + ".ArenaWorld");
+            int arenaMaxPlayers = ConfigManager.arenas.getInt("arenas." + i + ".ArenaMaxPlayers");
+            int arenaMinPlayers = ConfigManager.arenas.getInt("arenas." + i + "ArenaMinPlayers");
+            int arenaSeekersCount = ConfigManager.arenas.getInt("arenas." + i + "ArenaSeekersCount");
 
-        for (String key : section.getKeys(false)) {
-            arenaList.add(key);
+            Arena arena = new Arena(arenaName, worldName, arenaMaxPlayers, arenaMinPlayers, arenaSeekersCount);
+
+            arenas.add(arena);
         }
-        return arenaList;
     }
     public List<Arena> getListOfArenas() {
         return arenas;

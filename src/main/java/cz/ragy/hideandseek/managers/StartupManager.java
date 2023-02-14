@@ -55,5 +55,6 @@ public class StartupManager {
                 " -> Developers: " + devs +
                 "\n" +
                 "\n\n\n");
+        new ArenaManager().loadArenas();
     }
 }
