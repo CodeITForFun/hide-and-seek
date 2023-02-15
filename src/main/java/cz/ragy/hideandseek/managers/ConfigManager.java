@@ -36,6 +36,8 @@ public class ConfigManager {
         arenas = new YamlConfiguration().loadConfiguration(arenasFile);
         config = new YamlConfiguration().loadConfiguration(configFile);
         writeToArenaFile();
+        ArenaManager.STATICARENAS = new ArrayList<>();
+        new ArenaManager().loadArenas();
     }
     public void saveArenasToConfig(List<Arena> arenaList, CommandSender sender){
         writeToArenaFile();

@@ -127,6 +127,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                             Arena createdArena = new Arena(arenaName, arenaWorldName, maxPlayers, minPlayers, seekersCount);
                             ArenaManager arenaManager = new ArenaManager();
                             arenaManager.addArenaToList(createdArena, sender);
+                            new ConfigManager().startup();
                         } else {
                             sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(prefix + invalidMessage)));
                         }

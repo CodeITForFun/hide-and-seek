@@ -48,20 +48,21 @@ public class ArenaSelector extends PaginatedMenu {
     @Override
     public void setMenuItems() {
         super.addMenuBorder();
-        System.out.println(new ArenaManager().arenas);
-
-        if(new ArenaManager().arenas != null && !new ArenaManager().arenas.isEmpty()) {
+        if(new ArenaManager().STATICARENAS != null && !new ArenaManager().STATICARENAS.isEmpty()) {
             for(int i = 0; i < getMaxItemsPerPage(); i++) {
                 index = getMaxItemsPerPage() * page + i;
-                if(index >= new ArenaManager().arenas.size()) break;
-                if (new ArenaManager().arenas.get(index) != null){
+                if(index >= new ArenaManager().STATICARENAS.size()) break;
+                if (new ArenaManager().STATICARENAS.get(index) != null){
                     ///////////////////////////
 
                     //Create an item from our collection and place it into the inventory
                     ItemStack playerItem = new ItemStack(Material.STONE, 1);
                     ItemMeta playerMeta = playerItem.getItemMeta();
-                    playerMeta.setDisplayName(ChatColor.RED + new ArenaManager().arenas.get(index).arenaName);
-                    System.out.println(new ArenaManager().arenas.get(index).arenaName);
+                    playerMeta.setDisplayName(ChatColor.RED + new ArenaManager().STATICARENAS.get(index).arenaName);
+                    ArrayList<String> jj = new ArrayList<>();
+                    jj.add(Colors.translate(new ArenaManager().STATICARENAS.get(index).arenaWorldName));
+                    jj.add(Colors.translate(String.valueOf(new ArenaManager().STATICARENAS.get(index).maxPlayers)));
+                    playerMeta.setLore(jj);
 
                     //playerMeta.getPersistentDataContainer().set(new NamespacedKey(MenuManagerSystem.getPlugin(), "uuid"), PersistentDataType.STRING, players.get(index).getUniqueId().toString());
                     playerItem.setItemMeta(playerMeta);

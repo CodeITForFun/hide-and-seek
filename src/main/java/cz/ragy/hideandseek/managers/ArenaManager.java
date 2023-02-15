@@ -1,5 +1,6 @@
 package cz.ragy.hideandseek.managers;
 
+import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.game.Arena;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
@@ -12,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArenaManager {
-    public static List<Arena> arenas = new ArrayList<Arena>();
+    public List<Arena> arenas = new ArrayList<Arena>();
+
+    public static List<Arena> STATICARENAS = new ArrayList<Arena>();
 
     public void addArenaToList(Arena arena, CommandSender sender){
         arenas.add(arena);
@@ -23,17 +26,18 @@ public class ArenaManager {
     }
 
     public void loadArenas() {
-        //TODO: fix because i isnt a number but string
-        for(int i = 0; i < ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false).size(); i++) {
-            String arenaName = ConfigManager.arenas.getString("arenas." + i);
-            String worldName = ConfigManager.arenas.getString("arenas." + i + ".ArenaWorld");
-            int arenaMaxPlayers = ConfigManager.arenas.getInt("arenas." + i + ".ArenaMaxPlayers");
-            int arenaMinPlayers = ConfigManager.arenas.getInt("arenas." + i + "ArenaMinPlayers");
-            int arenaSeekersCount = ConfigManager.arenas.getInt("arenas." + i + "ArenaSeekersCount");
+        File arenaFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
+        YamlConfiguration arenacfg = YamlConfiguration.loadConfiguration(arenaFile);
 
-            Arena arena = new Arena(arenaName, worldName, arenaMaxPlayers, arenaMinPlayers, arenaSeekersCount);
+        for (String key : arenacfg.getConfigurationSection("arenas").getKeys(false)) {
+            String worldName = ConfigManager.arenas.getString("arenas." + key + ".ArenaWorld");
+            int arenaMaxPlayers = ConfigManager.arenas.getInt("arenas." + key + ".ArenaMaxPlayers");
+            int arenaMinPlayers = ConfigManager.arenas.getInt("arenas." + key + "ArenaMinPlayers");
+            int arenaSeekersCount = ConfigManager.arenas.getInt("arenas." + key + "ArenaSeekersCount");
 
-            arenas.add(arena);
+            Arena arena = new Arena(key, worldName, arenaMaxPlayers, arenaMinPlayers, arenaSeekersCount);
+
+            STATICARENAS.add(arena);
         }
     }
     public List<Arena> getListOfArenas() {
