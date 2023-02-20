@@ -45,6 +45,7 @@ ArenaSelector:
     - "&8Jozko"
     - "&#084cfbT&#0d51fbe&#1256fbs&#175cfbt &#1d61fbo&#2266fbf &#276bfbR&#2c71fbG&#3176fcB &#367bfcc&#3c80fco&#4185fcl&#468bfco&#4b90fcr&#5095fcs &#559afc(&#5ba0fcr&#60a5fcg&#65aafcb&#6aaffc.&#6fb4fcb&#74bafci&#79bffcr&#7fc4fcd&#84c9fdf&#89cefdl&#8ed4fdo&#93d9fdp&#98defd.&#9ee3fdc&#a3e9fdo&#a8eefdm&#adf3fd)"
     - "Line4"
+  arenaItem: "emerald_block"
 Create-Arena:
   Invalid-Message: "&cError! use command like this: /has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]"
   Created: "&aYour arena has been successfully created as %arena%!" # Use %arena% for show arena name

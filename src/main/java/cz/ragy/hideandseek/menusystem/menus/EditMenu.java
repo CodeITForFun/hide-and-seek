@@ -7,7 +7,6 @@ import cz.ragy.hideandseek.menusystem.Menu;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
 import cz.ragy.hideandseek.utilities.Colors;
 import cz.ragy.hideandseek.utilities.Digit;
-import games.negative.framework.gui.SignGUI;
 import net.wesjd.anvilgui.AnvilGUI;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -15,7 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
 import java.util.ArrayList;

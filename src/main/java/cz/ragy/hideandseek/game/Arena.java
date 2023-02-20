@@ -1,6 +1,8 @@
 package cz.ragy.hideandseek.game;
 
 import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 
@@ -13,17 +15,23 @@ public class Arena {
     public int minPlayers;
     public int seekersCount;
     public int hidersCount;
+    public Location lobbyLocation;
+    public Location hidersLocation;
+    public Location seekersLocation;
     private List<Player> arenaPlayers;
     private boolean playing;
     private List<MiscDisguise> disguises;
 
-    public Arena(String arenaName, String arenaWorldName, Integer maxPlayers, Integer minPlayers, Integer seekersCount){
+    public Arena(String arenaName, String arenaWorldName, Integer maxPlayers, Integer minPlayers, Integer seekersCount, Location lobbyLocation, Location hidersLocation, Location seekersLocation){
         this.arenaName = arenaName;
         this.arenaWorldName = arenaWorldName;
         this.maxPlayers = maxPlayers;
         this.minPlayers = minPlayers;
         this.seekersCount = seekersCount;
         this.hidersCount = this.maxPlayers - this.seekersCount;
+        this.lobbyLocation = lobbyLocation;
+        this.hidersLocation = hidersLocation;
+        this.seekersLocation = seekersLocation;
     }
     public void removeArenaPlayer(Player player){
         this.arenaPlayers.remove(player);

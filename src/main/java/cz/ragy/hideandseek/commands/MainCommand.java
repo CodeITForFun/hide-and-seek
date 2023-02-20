@@ -9,6 +9,7 @@ import cz.ragy.hideandseek.menusystem.menus.EditMenu;
 import cz.ragy.hideandseek.utilities.Colors;
 import cz.ragy.hideandseek.utilities.Digit;
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -123,8 +124,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                             int maxPlayers = Integer.parseInt(args[4]);
                             int minPlayers = Integer.parseInt(args[5]);
                             int seekersCount = Integer.parseInt(args[6]);
-
-                            Arena createdArena = new Arena(arenaName, arenaWorldName, maxPlayers, minPlayers, seekersCount);
+                            Location loc = ((Player) sender).getLocation();
+                            Arena createdArena = new Arena(arenaName, arenaWorldName, maxPlayers, minPlayers, seekersCount, loc, loc, loc);
                             ArenaManager arenaManager = new ArenaManager();
                             arenaManager.addArenaToList(createdArena, sender);
                             new ConfigManager().startup();

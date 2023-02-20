@@ -2,6 +2,7 @@ package cz.ragy.hideandseek.managers;
 
 import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.game.Arena;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -32,10 +33,13 @@ public class ArenaManager {
         for (String key : arenacfg.getConfigurationSection("arenas").getKeys(false)) {
             String worldName = ConfigManager.arenas.getString("arenas." + key + ".ArenaWorld");
             int arenaMaxPlayers = ConfigManager.arenas.getInt("arenas." + key + ".ArenaMaxPlayers");
-            int arenaMinPlayers = ConfigManager.arenas.getInt("arenas." + key + "ArenaMinPlayers");
-            int arenaSeekersCount = ConfigManager.arenas.getInt("arenas." + key + "ArenaSeekersCount");
+            int arenaMinPlayers = ConfigManager.arenas.getInt("arenas." + key + ".ArenaMinPlayers");
+            int arenaSeekersCount = ConfigManager.arenas.getInt("arenas." + key + ".ArenaSeekersCount");
+            Location lobbyLocation = ConfigManager.arenas.getLocation("arenas." + key + ".LobbyLocation");
+            Location hidersLocation = ConfigManager.arenas.getLocation("arenas." + key + ".HidersLocation");
+            Location seekersLocation = ConfigManager.arenas.getLocation("arenas." + "SeekersLocation");
 
-            Arena arena = new Arena(key, worldName, arenaMaxPlayers, arenaMinPlayers, arenaSeekersCount);
+            Arena arena = new Arena(key, worldName, arenaMaxPlayers, arenaMinPlayers, arenaSeekersCount, lobbyLocation, hidersLocation, seekersLocation);
 
             STATICARENAS.add(arena);
         }
@@ -101,5 +105,19 @@ public class ArenaManager {
         } catch (IOException error) {
             error.printStackTrace();
         }
+    }
+    public Arena getArenaByString(String arenaName) {
+        ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
+        ConfigurationSection arena = parentSection.getConfigurationSection(arenaName);
+        Arena returningArena = new Arena(arenaName,
+                arena.getString("ArenaWorld"),
+                arena.getInt("ArenaMaxPlayers"),
+                arena.getInt("ArenaMinPlayers"),
+                arena.getInt("ArenaSeekersCount"),
+                arena.getLocation("LobbyLocation"),
+                arena.getLocation("HidersLocation"),
+                arena.getLocation("SeekersLocation")
+                );
+        return returningArena;
     }
 }

@@ -1,7 +1,5 @@
 package cz.ragy.hideandseek.menusystem;
 
-import games.negative.framework.cooldown.Cooldown;
-import games.negative.framework.cooldown.Cooldowns;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;

@@ -52,6 +52,9 @@ public class ConfigManager {
                 childSection.set("ArenaMaxPlayers", arena.maxPlayers);
                 childSection.set("ArenaMinPlayers", arena.minPlayers);
                 childSection.set("ArenaSeekersCount", arena.seekersCount);
+                childSection.set("LobbyLocation", arena.lobbyLocation);
+                childSection.set("SeekersLocation", arena.seekersLocation);
+                childSection.set("HidersLocation", arena.hidersLocation);
                 for(int i = 0; i > 10; i++){
                     sender.sendMessage("");
                 }

@@ -1,9 +1,9 @@
 package cz.ragy.hideandseek.menusystem.menus;
 
 import cz.ragy.hideandseek.game.Arena;
+import cz.ragy.hideandseek.managers.ArenaHandler;
 import cz.ragy.hideandseek.managers.ArenaManager;
 import cz.ragy.hideandseek.managers.ConfigManager;
-import cz.ragy.hideandseek.menusystem.Menu;
 import cz.ragy.hideandseek.menusystem.PaginatedMenu;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
 import cz.ragy.hideandseek.utilities.Colors;
@@ -15,10 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static org.bukkit.Bukkit.getServer;
-import static org.bukkit.Material.STONE;
 
 public class ArenaSelector extends PaginatedMenu {
     public ArenaSelector(PlayerMenuUtility playerMenuUtility) {
@@ -38,10 +35,12 @@ public class ArenaSelector extends PaginatedMenu {
     @Override
     public void handleMenu(InventoryClickEvent e) {
         ItemStack item = e.getCurrentItem();
-        switch (item.getType()) {
-            case STONE:
-                e.getWhoClicked().sendMessage("stone");
-                break;
+        Material mat = Material.matchMaterial(ConfigManager.config.getString("ArenaSelector.arenaItem").toUpperCase());
+        if(item.getType() == mat) {
+            System.out.println(ChatColor.stripColor(item.getItemMeta().getDisplayName()));
+            Arena arenaClicked = new ArenaManager().getArenaByString(ChatColor.stripColor(item.getItemMeta().getDisplayName()));
+            e.getView().close();
+            new ArenaHandler().joinArena((Player) e.getWhoClicked(), arenaClicked);
         }
     }
 
@@ -53,23 +52,16 @@ public class ArenaSelector extends PaginatedMenu {
                 index = getMaxItemsPerPage() * page + i;
                 if(index >= new ArenaManager().STATICARENAS.size()) break;
                 if (new ArenaManager().STATICARENAS.get(index) != null){
-                    ///////////////////////////
-
-                    //Create an item from our collection and place it into the inventory
-                    ItemStack playerItem = new ItemStack(Material.STONE, 1);
+                    ItemStack playerItem = new ItemStack(Material.matchMaterial(ConfigManager.config.getString("ArenaSelector.arenaItem").toUpperCase()), 1);
                     ItemMeta playerMeta = playerItem.getItemMeta();
                     playerMeta.setDisplayName(ChatColor.RED + new ArenaManager().STATICARENAS.get(index).arenaName);
                     ArrayList<String> jj = new ArrayList<>();
                     jj.add(Colors.translate(new ArenaManager().STATICARENAS.get(index).arenaWorldName));
                     jj.add(Colors.translate(String.valueOf(new ArenaManager().STATICARENAS.get(index).maxPlayers)));
                     playerMeta.setLore(jj);
-
-                    //playerMeta.getPersistentDataContainer().set(new NamespacedKey(MenuManagerSystem.getPlugin(), "uuid"), PersistentDataType.STRING, players.get(index).getUniqueId().toString());
                     playerItem.setItemMeta(playerMeta);
 
                     inventory.addItem(playerItem);
-
-                    ////////////////////////
                 }
             }
         }
