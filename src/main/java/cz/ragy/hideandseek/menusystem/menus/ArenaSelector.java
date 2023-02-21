@@ -1,7 +1,7 @@
 package cz.ragy.hideandseek.menusystem.menus;
 
 import cz.ragy.hideandseek.game.Arena;
-import cz.ragy.hideandseek.managers.ArenaHandler;
+import cz.ragy.hideandseek.managers.GameManager;
 import cz.ragy.hideandseek.managers.ArenaManager;
 import cz.ragy.hideandseek.managers.ConfigManager;
 import cz.ragy.hideandseek.menusystem.PaginatedMenu;
@@ -37,10 +37,9 @@ public class ArenaSelector extends PaginatedMenu {
         ItemStack item = e.getCurrentItem();
         Material mat = Material.matchMaterial(ConfigManager.config.getString("ArenaSelector.arenaItem").toUpperCase());
         if(item.getType() == mat) {
-            System.out.println(ChatColor.stripColor(item.getItemMeta().getDisplayName()));
             Arena arenaClicked = new ArenaManager().getArenaByString(ChatColor.stripColor(item.getItemMeta().getDisplayName()));
             e.getView().close();
-            new ArenaHandler().joinArena((Player) e.getWhoClicked(), arenaClicked);
+            new GameManager().joinArena((Player) e.getWhoClicked(), arenaClicked);
         }
     }
 

@@ -107,17 +107,16 @@ public class ArenaManager {
         }
     }
     public Arena getArenaByString(String arenaName) {
+        //TODO: want to get from static arenas
         ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
         ConfigurationSection arena = parentSection.getConfigurationSection(arenaName);
-        Arena returningArena = new Arena(arenaName,
-                arena.getString("ArenaWorld"),
-                arena.getInt("ArenaMaxPlayers"),
-                arena.getInt("ArenaMinPlayers"),
-                arena.getInt("ArenaSeekersCount"),
-                arena.getLocation("LobbyLocation"),
-                arena.getLocation("HidersLocation"),
-                arena.getLocation("SeekersLocation")
-                );
-        return returningArena;
+        int index = -1;
+        for (int i = 0; i < STATICARENAS.size(); i++) {
+            if (STATICARENAS.get(i).arenaName.toString().equals(arenaName.toString())) {
+                index = i;
+                return STATICARENAS.get(index);
+            }
+        }
+        return null;
     }
 }
