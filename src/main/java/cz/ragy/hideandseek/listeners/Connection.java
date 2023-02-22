@@ -27,12 +27,6 @@ public class Connection implements Listener {
     public boolean gvCompass = ConfigManager.config.getBoolean("ArenaSelector.arenaSelectorEnabled");
     public boolean clearInv = ConfigManager.config.getBoolean("Lobby.clearInventoryOnJoin");
     public String joinMessage = ConfigManager.config.getString("Lobby.onJoinMessage");
-    public double onJoinX = ConfigManager.config.getDouble("Lobby.onJoinX");
-    public double onJoinY = ConfigManager.config.getDouble("Lobby.onJoinY");
-    public double onJoinZ = ConfigManager.config.getDouble("Lobby.onJoinZ");
-    public double onJoinPitch = ConfigManager.config.getDouble("Lobby.onJoinPitch");
-    public double onJoinYaw = ConfigManager.config.getDouble("Lobby.onJoinYaw");
-    public String worldName = ConfigManager.config.getString("Lobby.onJoinWorldName");
     public String cmpsName = ConfigManager.config.getString("ArenaSelector.arenaSelectorItemName");
     public String cmpsItem = ConfigManager.config.getString("ArenaSelector.arenaSelectorItemType");
     public Integer cmpsSlot = ConfigManager.config.getInt("ArenaSelector.arenaSelectorSlot");

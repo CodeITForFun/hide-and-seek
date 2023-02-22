@@ -21,15 +21,6 @@ Core:
 
 Lobby:
   Damage: false # Set this to true if you want getting damage
-  Success: "&7Please for lobby setup reload plugin using &c/has reload"
-  Warning: "&eThe teleport on join is disabled! To enable it, set Lobby.onJoinLobby to true."
-  onJoinLobby: true #When player joins server it teleports him to defined point
-  onJoinX: 40.9 #X position of lobby spawn
-  onJoinY: 140.6 #Y position of lobby spawn
-  onJoinZ: 33.4 #Z position of lobby spawn
-  onJoinPitch: 30.5
-  onJoinYaw: 40.3
-  onJoinWorldName: "world" #Name of the world
   clearInventoryOnJoin: true
   onJoinMessage: "Player %player% joined!" #Use %player% for player's nickname
 Reload:
