@@ -17,27 +17,34 @@ import java.util.List;
 import java.util.Map;
 
 public class ConfigManager {
-    public static File configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
-    public static File arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
-    public FileConfiguration confik = YamlConfiguration.loadConfiguration(configFile);
+    public static File configFile;
+    public static File arenasFile;
+    public static FileConfiguration confik;
     public static YamlConfiguration arenas;
+
     public static YamlConfiguration config;
-    public String setArena;
-    public String creating = (String) confik.get("Create-Arena.Creating-Arena");
-    public String arenaCreated = (String) confik.get("Create-Arena.Created");
-    public String arenaExists = (String) confik.get("Create-Arena.Arena-Exists");
+    public static String setArena;
+    public static String creating;
+    public static String arenaCreated;
+    public static String arenaExists;
     public void startup() {
+        configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
+        arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
         if(!configFile.exists()) {
             HideAndSeek.instance.saveResource("config.yml", true);
         }
         if(!arenasFile.exists()){
             HideAndSeek.instance.saveResource("arenas.yml", true);
         }
+        confik = YamlConfiguration.loadConfiguration(configFile);
         arenas = new YamlConfiguration().loadConfiguration(arenasFile);
         config = new YamlConfiguration().loadConfiguration(configFile);
         writeToArenaFile();
         ArenaManager.STATICARENAS = new ArrayList<>();
         new ArenaManager().loadArenas();
+        arenaExists = (String) confik.get("Create-Arena.Arena-Exists");
+        arenaCreated = (String) confik.get("Create-Arena.Created");
+        creating = (String) confik.get("Create-Arena.Creating-Arena");
     }
     public void saveArenasToConfig(List<Arena> arenaList, CommandSender sender){
         writeToArenaFile();
@@ -103,7 +110,7 @@ public class ConfigManager {
         parentSection.set(arenaNewName, null);
         parentSection.createSection(arenaNewName, values);
     }
-    public void reloadAllConfigs(){
+    public void reloadAllConfigs() {
         Bukkit.getPluginManager().disablePlugin(HideAndSeek.instance);
         Bukkit.getPluginManager().enablePlugin(HideAndSeek.instance);
     }

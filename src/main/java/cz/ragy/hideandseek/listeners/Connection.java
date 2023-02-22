@@ -44,10 +44,6 @@ public class Connection implements Listener {
         event.setJoinMessage(Colors.translate(joinMessage));
         Player player = event.getPlayer();
         if (clearInv) player.getInventory().clear();
-        if(tpOnJoin) {
-            World world = Bukkit.getWorld(worldName);
-            player.teleport(new Location(world, onJoinX, onJoinY, onJoinZ, (float) onJoinYaw, (float) onJoinPitch));
-        }
         if(gvCompass) {
             ItemStack neco = new ItemStack(Material.matchMaterial(cmpsItem.toUpperCase()));
             ItemMeta necoMeta = neco.getItemMeta();

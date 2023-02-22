@@ -1,4 +1,4 @@
-# Hide and Seek - Plugin by Ragy - Development has been paused!
+# Hide and Seek - Plugin by Ragy - 🔴
 Basic and simple minecraft hide and seek plugin
 
   | 🟠 = Plugin is in beta         |
@@ -10,7 +10,9 @@ Basic and simple minecraft hide and seek plugin
 # Commands
 `/has` **-** Main command for Hide And Seek Plugin, shows Help Menu
  <br>`/has help` **-** shows Help Menu
- <br>`/has createarena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]` **-** Creates a new arena
+ <br>`/has setup arena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]` **-** Creates a new arena
+ <br>`/has setup lobby` **-** Sets lobby spawnpoint
+ <br>`/has editarena [arena]` Edits arena
 <br>`/has reload` **-** Reloads the plugin
 <hr>
 

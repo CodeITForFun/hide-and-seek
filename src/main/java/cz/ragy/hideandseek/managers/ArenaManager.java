@@ -107,7 +107,6 @@ public class ArenaManager {
         }
     }
     public Arena getArenaByString(String arenaName) {
-        //TODO: want to get from static arenas
         ConfigurationSection parentSection = ConfigManager.arenas.getConfigurationSection("arenas");
         ConfigurationSection arena = parentSection.getConfigurationSection(arenaName);
         int index = -1;

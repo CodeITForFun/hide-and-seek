@@ -57,7 +57,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                     case "reload":
                         if (!sender.hasPermission("has.reload") || !sender.hasPermission("has.*")) { sender.sendMessage(Colors.translate(prefix + noPerms)); return true;}
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + Reload)));
-                        new ConfigManager().reloadAllConfigs();
+                        new ConfigManager().startup();
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + sucReloaded)));
                         break;
                     case "setup":
@@ -87,7 +87,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         if (!LobbySpawnStatus) {
                             sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(LobbyWarning)));
                         }
-                        new ConfigManager().reloadAllConfigs();
+                        new ConfigManager().startup();
                         return true;
                     }
                     if (args[1].equals("arena")) { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate(prefix + invalidMessage))); }
