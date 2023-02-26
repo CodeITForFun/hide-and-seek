@@ -1,10 +1,7 @@
 package cz.ragy.hideandseek.managers;
 
-import cz.ragy.hideandseek.HideAndSeek;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import cz.ragy.hideandseek.managers.ConfigManager;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,16 +14,16 @@ public class DatabaseManager {
     public String username = (String) ConfigManager.config.get("Database.username");
     public String password = (String) ConfigManager.config.get("Database.password");
     public static Connection connection;
-    public void DatabaseManager() {
 
-        if(databaseType.toLowerCase().equals("MySQL")) {
+    public DatabaseManager() {
+        if(databaseType.toLowerCase().equals("mysql")) {
             Connection connection = null;
             try {
                 connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else if(databaseType.toLowerCase().equals("SQLite")) {
+        } else if(databaseType.toLowerCase().equals("sqlite")) {
             String fileName = "database.db";
             Connection connection = null;
             try {
