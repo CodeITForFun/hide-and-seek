@@ -3,8 +3,7 @@ package cz.ragy.hideandseek.database;
 import java.sql.*;
 
 public class MysqlManager {
-    private Connection connection;
-
+    private static Connection connection;
     public MysqlManager(String host, String database, String username, String password) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -47,5 +46,8 @@ public class MysqlManager {
         } catch (SQLException e) {
             System.err.println("Error closing connection: " + e.getMessage());
         }
+    }
+    public static Connection getConnection() {
+        return connection;
     }
 }

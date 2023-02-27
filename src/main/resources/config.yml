@@ -46,12 +46,12 @@ Create-Arena:
 Arena:
   ArenaDoesntExist: "Error! Arena %arena% doesn't exist"
   NowEditingArena: "You are now editing arena: %arena%"
+  LeaveArena: "Successfully left arena!"
 
 Database:
   # Type of database to use (options: MySQL, SQLite (Alredy not supported), Default: MySQL)
   Type: MySQL
   host: "localhost" # Hostname for MySQL database
-  port: 3306 # Port for MySQL database
   username: "root" # Username for MySQL database
   database: "has_s1924" # Database name for MySQL
   password: "root" # Password for MySQL database

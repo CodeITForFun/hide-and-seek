@@ -41,4 +41,11 @@ public class GameManager {
             player.sendMessage("You are already connected in one arena");
         }
     }
+    public void leaveArena(Player player) {
+        for(Arena arena : ArenaManager.STATICARENAS) {
+            if(arena.players.contains(player.getUniqueId()))
+            arena.removeArenaPlayer(player);
+            break;
+        }
+    }
 }

@@ -4,6 +4,7 @@ import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.managers.ArenaManager;
 import cz.ragy.hideandseek.managers.ConfigManager;
+import cz.ragy.hideandseek.managers.GameManager;
 import cz.ragy.hideandseek.managers.MessageManager;
 import cz.ragy.hideandseek.menusystem.menus.EditMenu;
 import cz.ragy.hideandseek.utilities.Colors;
@@ -31,6 +32,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public String prefix = (String) ConfigManager.config.get("Core.Prefix");
     public String noPerms = (String) ConfigManager.config.get("Core.No-Permission");
     public String invalidMessage = (String) ConfigManager.config.get("Create-Arena.Invalid-Message");
+    public String arenaLeave = (String) ConfigManager.config.get("Arena.LeaveArena");
     public String notEntity = (String) ConfigManager.config.get("Core.notEntity");
     public String Reload = (String) ConfigManager.config.get("Reload.Reload-Message");
     public String sucReloaded = (String) ConfigManager.config.get("Reload.Successfully-Reloaded");
@@ -65,8 +67,13 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("&7Hello, welcome to &eHide & Seek Plugin by Radekminecraft and FungY911.\nThis is Setup Wizard for this plugin.\n\nIf you need any help, you can join to [&9Discord server](https://discord.gg/EgqNXXcx2q)")));
                         //player.chat("/has setup lobby"); //automatically execute command
                         break;
+                    case "leave":
+                        new GameManager().leaveArena(player);
+                        sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(prefix + arenaLeave)));
+                        break;
                     default:
                         sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender,Colors.translate("Help Message")));
+                        break;
                 }
             }
             if(args.length == 2) {
@@ -150,6 +157,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             List<String> arguments = new ArrayList<>();
             arguments.add("help");
             arguments.add("joinarena");
+            arguments.add("leave");
             if (sender.hasPermission("has.tab") || sender.hasPermission("has.*")) {
                 arguments.add("reload");
                 arguments.add("setup");

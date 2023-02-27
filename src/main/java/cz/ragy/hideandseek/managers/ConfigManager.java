@@ -17,34 +17,40 @@ import java.util.List;
 import java.util.Map;
 
 public class ConfigManager {
-    public static File configFile;
-    public static File arenasFile;
-    public static FileConfiguration confik;
+    public static File configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
+    public static File arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
+    public FileConfiguration confik = new YamlConfiguration().loadConfiguration(configFile);;
     public static YamlConfiguration arenas;
 
     public static YamlConfiguration config;
     public static String setArena;
-    public static String creating;
-    public static String arenaCreated;
-    public static String arenaExists;
+    public String creating = (String) confik.get("Create-Arena.Creating-Arena");
+    public String arenaCreated = (String) confik.get("Create-Arena.Created");
+    public String arenaExists = (String) confik.get("Create-Arena.Arena-Exists");
     public void startup() {
-        configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
-        arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
         if(!configFile.exists()) {
             HideAndSeek.instance.saveResource("config.yml", true);
         }
         if(!arenasFile.exists()){
             HideAndSeek.instance.saveResource("arenas.yml", true);
         }
-        confik = YamlConfiguration.loadConfiguration(configFile);
-        arenas = new YamlConfiguration().loadConfiguration(arenasFile);
         config = new YamlConfiguration().loadConfiguration(configFile);
+        arenas = new YamlConfiguration().loadConfiguration(arenasFile);
         writeToArenaFile();
         ArenaManager.STATICARENAS = new ArrayList<>();
         new ArenaManager().loadArenas();
-        arenaExists = (String) confik.get("Create-Arena.Arena-Exists");
-        arenaCreated = (String) confik.get("Create-Arena.Created");
-        creating = (String) confik.get("Create-Arena.Creating-Arena");
+    }
+    public void reload() {
+        if(!configFile.exists()) {
+            HideAndSeek.instance.saveResource("config.yml", true);
+        }
+        if(!arenasFile.exists()){
+            HideAndSeek.instance.saveResource("arenas.yml", true);
+        }
+        configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
+        arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
+        arenas = YamlConfiguration.loadConfiguration(arenasFile);
+        config = YamlConfiguration.loadConfiguration(configFile);
     }
     public void saveArenasToConfig(List<Arena> arenaList, CommandSender sender){
         writeToArenaFile();
