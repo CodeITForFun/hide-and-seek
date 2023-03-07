@@ -21,6 +21,7 @@ Core:
 
 Lobby:
   Damage: false # Set this to true if you want getting damage
+  LobbyWorld: "world"
   clearInventoryOnJoin: true
   onJoinMessage: "Player %player% joined!" #Use %player% for player's nickname
 Reload:

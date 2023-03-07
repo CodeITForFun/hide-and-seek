@@ -48,8 +48,6 @@ public class EditMenu extends Menu {
                 new AnvilGUI.Builder()
                         .onComplete((completion) -> {
                             newArenaName = completion.getText();
-
-                            new ConfigManager().writeToArenaFile();
                             new ArenaManager().renameArena(arenaname, newArenaName);
                             newArenaName = null;
                             completion.getPlayer().sendMessage(Colors.translate("Saving..."));

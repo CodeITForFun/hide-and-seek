@@ -1,14 +1,13 @@
 package cz.ragy.hideandseek.game;
 
+import fr.mrmicky.fastboard.FastBoard;
 import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Arena {
     public String arenaName;
@@ -21,6 +20,7 @@ public class Arena {
     public Location hidersLocation;
     public Location seekersLocation;
     public List<UUID> players = new ArrayList<>();
+    public final Map<UUID, FastBoard> boards = new HashMap<>();
     public boolean playing;
     public List<MiscDisguise> hiders = new ArrayList<>();
     public List<UUID> seekers = new ArrayList<>();

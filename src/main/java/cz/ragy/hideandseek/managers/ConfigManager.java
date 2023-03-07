@@ -17,28 +17,31 @@ import java.util.List;
 import java.util.Map;
 
 public class ConfigManager {
-    public static File configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
-    public static File arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
-    public FileConfiguration confik = new YamlConfiguration().loadConfiguration(configFile);;
+    public static File configFile;
+    public static File arenasFile;
     public static YamlConfiguration arenas;
 
     public static YamlConfiguration config;
     public static String setArena;
-    public String creating = (String) confik.get("Create-Arena.Creating-Arena");
-    public String arenaCreated = (String) confik.get("Create-Arena.Created");
-    public String arenaExists = (String) confik.get("Create-Arena.Arena-Exists");
+    public static String creating;
+    public static String arenaCreated;
+    public static String arenaExists;
     public void startup() {
+        configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
+        arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
         if(!configFile.exists()) {
             HideAndSeek.instance.saveResource("config.yml", true);
         }
-        if(!arenasFile.exists()){
+        if(!arenasFile.exists()) {
             HideAndSeek.instance.saveResource("arenas.yml", true);
         }
-        config = new YamlConfiguration().loadConfiguration(configFile);
         arenas = new YamlConfiguration().loadConfiguration(arenasFile);
-        writeToArenaFile();
+        config = new YamlConfiguration().loadConfiguration(configFile);
         ArenaManager.STATICARENAS = new ArrayList<>();
         new ArenaManager().loadArenas();
+        creating = config.getString("Create-Arena.Creating-Arena");
+        arenaCreated = config.getString("Create-Arena.Created");
+        arenaExists = config.getString("Create-Arena.Arena-Exists");
     }
     public void reload() {
         if(!configFile.exists()) {
@@ -53,7 +56,6 @@ public class ConfigManager {
         config = YamlConfiguration.loadConfiguration(configFile);
     }
     public void saveArenasToConfig(List<Arena> arenaList, CommandSender sender){
-        writeToArenaFile();
         ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
 
         for (Arena arena : arenaList) {
@@ -119,16 +121,6 @@ public class ConfigManager {
     public void reloadAllConfigs() {
         Bukkit.getPluginManager().disablePlugin(HideAndSeek.instance);
         Bukkit.getPluginManager().enablePlugin(HideAndSeek.instance);
-    }
-    public void writeToArenaFile() {
-        if (arenas.getConfigurationSection("arenas") == null) {
-            arenas.createSection("arenas");
-            try {
-                arenas.save(arenasFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
     public boolean arenaExists(String arenaName) {
         ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");

@@ -9,8 +9,7 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GameManager {
     public void joinArena(Player player, Arena arena) {
@@ -25,11 +24,12 @@ public class GameManager {
                 FastBoard board = new FastBoard(player);
                 board.updateTitle(ChatColor.GOLD + "bruh");
                 board.updateLines(
-                        "", // Empty line
+                        "",
                         "hahahahhahaa",
                         "",
                         "Second line"
                 );
+                arena.boards.put(player.getUniqueId(), board);
                 if(arena.players.size() > arena.minPlayers) {
                     //start countdown for 30s if it is not already running
                     new MessageManager().printInfo("ZAPINAM!!");
@@ -44,8 +44,12 @@ public class GameManager {
     public void leaveArena(Player player) {
         for(Arena arena : ArenaManager.STATICARENAS) {
             if(arena.players.contains(player.getUniqueId()))
-            arena.removeArenaPlayer(player);
-            break;
+                arena.removeArenaPlayer(player);
+                FastBoard board = arena.boards.remove(player.getUniqueId());
+                if (board != null) {
+                    board.delete();
+                }
+                break;
         }
     }
 }
