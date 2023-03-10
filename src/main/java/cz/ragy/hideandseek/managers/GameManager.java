@@ -3,15 +3,22 @@ package cz.ragy.hideandseek.managers;
 import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.utilities.Colors;
 import fr.mrmicky.fastboard.FastBoard;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
 public class GameManager {
+
+    public String arenaLeave = (String) ConfigManager.config.get("Arena.LeaveArena");
+
+    public String prefix = (String) ConfigManager.config.get("Core.Prefix");
+    public String arenaNotConnected = (String) ConfigManager.config.get("Arena.NotConnected");
     public void joinArena(Player player, Arena arena) {
         if (!arena.players.contains(player.getUniqueId())) {
             if(!arena.playing) {
@@ -31,7 +38,6 @@ public class GameManager {
                 );
                 arena.boards.put(player.getUniqueId(), board);
                 if(arena.players.size() > arena.minPlayers) {
-                    //start countdown for 30s if it is not already running
                     new MessageManager().printInfo("ZAPINAM!!");
                 }
             } else {
@@ -42,14 +48,17 @@ public class GameManager {
         }
     }
     public void leaveArena(Player player) {
-        for(Arena arena : ArenaManager.STATICARENAS) {
+        loop: for(Arena arena : ArenaManager.STATICARENAS) {
             if(arena.players.contains(player.getUniqueId()))
+            {
                 arena.removeArenaPlayer(player);
                 FastBoard board = arena.boards.remove(player.getUniqueId());
                 if (board != null) {
                     board.delete();
                 }
+                player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(prefix + arenaLeave)));
                 break;
+            } else player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(prefix + arenaNotConnected)));
         }
     }
 }
