@@ -11,7 +11,6 @@ import cz.ragy.hideandseek.menusystem.menus.EditMenu;
 import cz.ragy.hideandseek.utilities.Colors;
 import cz.ragy.hideandseek.utilities.Digit;
 import me.clip.placeholderapi.PlaceholderAPI;
-import net.minecraft.util.ColorUtil;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
