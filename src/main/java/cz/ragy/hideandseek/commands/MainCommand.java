@@ -27,12 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
-    public static final File arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
-    public YamlConfiguration arenas = new YamlConfiguration().loadConfiguration(arenasFile);
-    public String prefix = (String) ConfigManager.config.get("Core.Prefix");
-    public String invalidMessage = (String) ConfigManager.config.get("Create-Arena.Invalid-Message");
     public String notEntity = (String) ConfigManager.config.get("Core.notEntity");
-
     private ArrayList<SubCommand> subcommands = new ArrayList<>();
 
     public MainCommand () {
