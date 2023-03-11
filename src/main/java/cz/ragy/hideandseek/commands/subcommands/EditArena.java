@@ -2,6 +2,7 @@ package cz.ragy.hideandseek.commands.subcommands;
 
 import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.commands.SubCommand;
+import cz.ragy.hideandseek.managers.ConfigLoader;
 import cz.ragy.hideandseek.managers.ConfigManager;
 import cz.ragy.hideandseek.menusystem.menus.EditMenu;
 import cz.ragy.hideandseek.utilities.Colors;
@@ -27,12 +28,12 @@ public class EditArena extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if(!(player.hasPermission("has.editArena"))) { player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(noPerms))); return; }
+        if(!(player.hasPermission("has.editArena"))) { player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(ConfigLoader.noPerms))); return; }
         if(new ConfigManager().arenaExists(args[1])) {
             new EditMenu(HideAndSeek.getPlayerMenuUtility(player), args[1]).open();
-            player.sendMessage(new ConfigManager().getStringFromConfig("Arena.NowEditingArena").replace("%arena%", args[1]));
+            player.sendMessage(ConfigLoader.arenaNowEditing.replace("%arena%", args[1]));
         } else {
-            player.sendMessage(new ConfigManager().getStringFromConfig("Arena.ArenaDoesntExist").replace("%arena%", args[1]));
+            player.sendMessage(ConfigLoader.arenaDoesntExist.replace("%arena%", args[1]));
         }
     }
 }

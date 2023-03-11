@@ -1,6 +1,7 @@
 package cz.ragy.hideandseek.listeners;
 
 import cz.ragy.hideandseek.HideAndSeek;
+import cz.ragy.hideandseek.managers.ConfigLoader;
 import cz.ragy.hideandseek.managers.ConfigManager;
 import cz.ragy.hideandseek.menusystem.menus.ArenaSelector;
 import cz.ragy.hideandseek.utilities.Colors;
@@ -14,9 +15,8 @@ public class ItemClick implements Listener {
     @EventHandler
     public void onItemClick(PlayerInteractEvent event) {
         ItemStack itemClicked = event.getPlayer().getItemInHand();
-        if(itemClicked.getType() == Material.matchMaterial(ConfigManager.config.getString("ArenaSelector.arenaSelectorItemType").toUpperCase())
-                &&
-                itemClicked.getItemMeta().getDisplayName().equals(Colors.translate(ConfigManager.config.getString("ArenaSelector.arenaSelectorItemName")))
+        if(itemClicked.getType() == Material.matchMaterial(ConfigLoader.arenaSelectorItemType.toUpperCase()) &&
+                itemClicked.getItemMeta().getDisplayName().equals(Colors.translate(ConfigLoader.arenaSelectorItemName))
         ) {
             new ArenaSelector(HideAndSeek.getPlayerMenuUtility(event.getPlayer())).open();
         }

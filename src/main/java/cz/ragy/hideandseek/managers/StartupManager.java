@@ -19,6 +19,7 @@ public class StartupManager {
 
         server.getLogger().info("Loading config files...");
         new ConfigManager().startup();
+        new ConfigLoader();
 
         server.getLogger().info("Loading commands...");
         instance.getCommand("has").setExecutor(new MainCommand());

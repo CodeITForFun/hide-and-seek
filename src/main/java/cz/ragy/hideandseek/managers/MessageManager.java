@@ -12,26 +12,23 @@ import java.util.Random;
 
 
 public class MessageManager extends BukkitRunnable {
-    private List<String> messages = ConfigManager.config.getStringList("Auto-Broadcast.messages");;
-    private boolean random = ConfigManager.config.getBoolean("Auto-Broadcast.random");;
     private int lastMessage;
-
     @Override
     public void run() {
         String message = "";
-        if (!random) {
-            if (lastMessage >= messages.size()) {
+        if (!ConfigLoader.random) {
+            if (lastMessage >= ConfigLoader.messages.size()) {
                 lastMessage = 0;
             }
-            message = messages.get(lastMessage);
+            message = ConfigLoader.messages.get(lastMessage);
             lastMessage++;
         } else {
             Random random = new Random();
-            int nextMessage = random.nextInt(messages.size());
+            int nextMessage = random.nextInt(ConfigLoader.messages.size());
             while (nextMessage == lastMessage) {
-                nextMessage = random.nextInt(messages.size());
+                nextMessage = random.nextInt(ConfigLoader.messages.size());
             }
-            message = messages.get(nextMessage);
+            message = ConfigLoader.messages.get(nextMessage);
             lastMessage = nextMessage;
         }
         for (Player player : Bukkit.getOnlinePlayers()) {

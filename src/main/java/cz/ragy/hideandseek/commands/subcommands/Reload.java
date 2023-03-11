@@ -1,6 +1,7 @@
 package cz.ragy.hideandseek.commands.subcommands;
 
 import cz.ragy.hideandseek.commands.SubCommand;
+import cz.ragy.hideandseek.managers.ConfigLoader;
 import cz.ragy.hideandseek.managers.ConfigManager;
 import cz.ragy.hideandseek.utilities.Colors;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -8,10 +9,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class Reload extends SubCommand {
-
-    public String Reload = (String) ConfigManager.config.get("Reload.Reload-Message");
-    public String sucReloaded = (String) ConfigManager.config.get("Reload.Successfully-Reloaded");
-
     @Override
     public String getName() {
         return "reload";
@@ -29,9 +26,10 @@ public class Reload extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (!player.hasPermission("has.reload") || !player.hasPermission("has.*")) { player.sendMessage(Colors.translate(prefix + noPerms)); return; }
-        player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(prefix + Reload)));
+        if (!player.hasPermission("has.reload") || !player.hasPermission("has.*")) { player.sendMessage(Colors.translate(ConfigLoader.prefix + ConfigLoader.noPerms)); return; }
+        player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(ConfigLoader.prefix + ConfigLoader.reload)));
         new ConfigManager().startup();
-        player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(prefix + sucReloaded)));
+        new ConfigLoader();
+        player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(ConfigLoader.prefix + ConfigLoader.sucReloaded)));
     }
 }

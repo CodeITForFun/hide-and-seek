@@ -2,6 +2,7 @@ package cz.ragy.hideandseek.commands;
 
 import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.commands.subcommands.*;
+import cz.ragy.hideandseek.managers.ConfigLoader;
 import cz.ragy.hideandseek.managers.ConfigManager;
 import cz.ragy.hideandseek.utilities.Colors;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
-    public String notEntity = (String) ConfigManager.config.get("Core.notEntity");
     private ArrayList<SubCommand> subcommands = new ArrayList<>();
 
     public MainCommand () {
@@ -27,6 +27,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         subcommands.add(new Setup());
         subcommands.add(new Leave());
         subcommands.add(new EditArena());
+        subcommands.add(new Build());
     }
 
     @Override
@@ -47,7 +48,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 player.sendMessage(Colors.translate("&8&m----------------------------------------"));
             }
             return true;
-        } else { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(notEntity))); return true; }
+        } else { sender.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, Colors.translate(ConfigLoader.notEntity))); return true; }
     }
 
     @Override
@@ -61,6 +62,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 arguments.add("reload");
                 arguments.add("setup");
                 arguments.add("editarena");
+                arguments.add("build");
             }
             return arguments;
         } else if(args.length == 2) {

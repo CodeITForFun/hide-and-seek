@@ -25,8 +25,18 @@ Lobby:
   clearInventoryOnJoin: true
   onJoinLobby: true
   onJoinMessage: "Player %player% joined!" #Use %player% for player's nickname
-  Success: "&2Lobby has been successfully set!"
-  LobbyLocation:
+  Success: "&aLobby has been successfully set!"
+  BuildMode:
+    on: "&aYou turned on build mode!"
+    off: "&cYou turned off build mode!"
+  LobbyLocation: #You can edit lobby location
+    ==: org.bukkit.Location
+    world: world
+    x: 0
+    y: 76.0
+    z: 0
+    pitch: 1
+    yaw: 60
 Reload:
   Reload-Message: "&cPlease wait, reloading plugin!"
   Successfully-Reloaded: "&aFiles arenas.yml, config.yml has beed reloaded!"

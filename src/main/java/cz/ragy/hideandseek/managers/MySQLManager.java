@@ -10,10 +10,6 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 public class MySQLManager {
-    public static String databaseType = ConfigManager.config.getString("Database.Type").toLowerCase();
-    public static String failedConnectToDB = ConfigManager.config.getString("Database.Failed");
-    public static String ConnectedToDB = ConfigManager.config.getString("Database.Connected");
-
     private Connection connection;
     private String host, database, username, password;
     private int port;
@@ -27,7 +23,7 @@ public class MySQLManager {
     }
 
     public void connect() throws SQLException {
-        if(databaseType.toLowerCase().equals("MySQL")) {
+        if(ConfigLoader.databaseType.toLowerCase().equals("mysql")) {
             Connection connection = null;
             try {
 
@@ -38,12 +34,12 @@ public class MySQLManager {
                 }
                 Bukkit.getLogger().warning("Please wait, connecting to the database.");
                 connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
-                Bukkit.getLogger().info(ConnectedToDB);
+                Bukkit.getLogger().info(ConfigLoader.connectedToDB);
             } catch (SQLException e) {
-                Bukkit.getLogger().warning(failedConnectToDB);
+                Bukkit.getLogger().warning(ConfigLoader.failedToConnect);
                 Bukkit.getLogger().warning(String.valueOf(e));
             }
-        } else if(databaseType.toLowerCase().equals("SQLite")) {
+        } else if(ConfigLoader.databaseType.toLowerCase().equals("sqlite")) {
             String fileName = "database.db";
             Connection connection = null;
             try {

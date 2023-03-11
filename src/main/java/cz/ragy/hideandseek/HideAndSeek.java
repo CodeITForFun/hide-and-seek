@@ -2,7 +2,6 @@ package cz.ragy.hideandseek;
 
 import cz.ragy.hideandseek.managers.StartupManager;
 import cz.ragy.hideandseek.menusystem.PlayerMenuUtility;
-import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,7 +15,7 @@ import static org.bukkit.Bukkit.getPluginManager;
 
 public final class HideAndSeek extends JavaPlugin {
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
-    public List<UUID> buildPlayers = new ArrayList<>();
+    public static List<UUID> buildPlayers = new ArrayList<>();
     public static HideAndSeek instance;
     @Override
     public void onEnable() {

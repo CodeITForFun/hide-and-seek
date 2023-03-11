@@ -13,7 +13,8 @@ Basic and simple minecraft hide and seek plugin
  <br>`/has setup arena [arenaName] [arenaWorldName] [maxplayers] [minplayers] [seekersCount]` **-** Creates a new arena
  <br>`/has setup lobby` **-** Sets lobby spawnpoint
  <br>`/has editarena [arena]` Edits arena
-<br>`/has reload` **-** Reloads the plugin
+ <br>`/has build [player]` Turns on / off build mode for player 
+ <br>`/has reload` **-** Reloads the plugin
 <hr>
 
 # TODO

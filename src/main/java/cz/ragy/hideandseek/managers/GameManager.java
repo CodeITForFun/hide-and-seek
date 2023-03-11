@@ -10,11 +10,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class GameManager {
-
-    public String arenaLeave = (String) ConfigManager.config.get("Arena.LeaveArena");
-
-    public String prefix = (String) ConfigManager.config.get("Core.Prefix");
-    public String arenaNotConnected = (String) ConfigManager.config.get("Arena.NotConnected");
     public void joinArena(Player player, Arena arena) {
         if (!arena.players.contains(player.getUniqueId())) {
             if(!arena.playing) {
@@ -44,7 +39,7 @@ public class GameManager {
         }
     }
     public void leaveArena(Player player) {
-        loop: for(Arena arena : ArenaManager.STATICARENAS) {
+        for(Arena arena : ArenaManager.STATICARENAS) {
             if(arena.players.contains(player.getUniqueId()))
             {
                 arena.removeArenaPlayer(player);
@@ -52,9 +47,9 @@ public class GameManager {
                 if (board != null) {
                     board.delete();
                 }
-                player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(prefix + arenaLeave)));
+                player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(ConfigLoader.prefix + ConfigLoader.arenaLeave)));
                 break;
-            } else player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(prefix + arenaNotConnected)));
+            } else player.sendMessage(PlaceholderAPI.setPlaceholders((OfflinePlayer) player, Colors.translate(ConfigLoader.prefix + ConfigLoader.arenaNotConnected)));
         }
     }
 }

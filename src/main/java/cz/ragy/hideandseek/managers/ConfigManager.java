@@ -41,18 +41,6 @@ public class ConfigManager {
         arenaCreated = config.getString("Create-Arena.Created");
         arenaExists = config.getString("Create-Arena.Arena-Exists");
     }
-    public void reload() {
-        if(!configFile.exists()) {
-            HideAndSeek.instance.saveResource("config.yml", true);
-        }
-        if(!arenasFile.exists()){
-            HideAndSeek.instance.saveResource("arenas.yml", true);
-        }
-        configFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
-        arenasFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
-        arenas = YamlConfiguration.loadConfiguration(arenasFile);
-        config = YamlConfiguration.loadConfiguration(configFile);
-    }
     public void saveArenasToConfig(List<Arena> arenaList, CommandSender sender){
         ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
 
@@ -92,34 +80,6 @@ public class ConfigManager {
             e.printStackTrace();
         }
     }
-
-    public void editArena(String arenaName, String whatToEdit, String toWhat) {
-        ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
-        for (String key : ConfigManager.arenas.getConfigurationSection("arenas").getKeys(false)) {
-            if(key != arenaName) {
-                System.out.println("err");
-                break;
-            } else {
-                ConfigurationSection childSection = parentSection.getConfigurationSection(arenaName);
-                childSection.set(whatToEdit, toWhat);
-            }
-        }
-    }
-    public void editArenaName(String arenaName, String arenaNewName) {
-        ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
-        ConfigurationSection oldSection = config.getConfigurationSection(arenaName);
-
-        if (oldSection == null) {
-            return;
-        }
-        Map<String, Object> values = oldSection.getValues(true);
-        parentSection.set(arenaNewName, null);
-        parentSection.createSection(arenaNewName, values);
-    }
-    public void reloadAllConfigs() {
-        Bukkit.getPluginManager().disablePlugin(HideAndSeek.instance);
-        Bukkit.getPluginManager().enablePlugin(HideAndSeek.instance);
-    }
     public boolean arenaExists(String arenaName) {
         ConfigurationSection parentSection = arenas.getConfigurationSection("arenas");
         if (parentSection.getConfigurationSection(arenaName) == null) {
@@ -127,14 +87,5 @@ public class ConfigManager {
         } else {
             return true;
         }
-    }
-    public String getStringFromConfig(String string) {
-        return config.getString(string);
-    }
-    public void reloadConfigs() {
-        File arenaFile = new File(HideAndSeek.instance.getDataFolder(), "arenas.yml");
-        arenas = YamlConfiguration.loadConfiguration(arenaFile);
-        File cfgFile = new File(HideAndSeek.instance.getDataFolder(), "config.yml");
-        config = YamlConfiguration.loadConfiguration(cfgFile);
     }
 }

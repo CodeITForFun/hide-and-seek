@@ -1,6 +1,7 @@
 package cz.ragy.hideandseek.menusystem.menus;
 
 import cz.ragy.hideandseek.game.Arena;
+import cz.ragy.hideandseek.managers.ConfigLoader;
 import cz.ragy.hideandseek.managers.GameManager;
 import cz.ragy.hideandseek.managers.ArenaManager;
 import cz.ragy.hideandseek.managers.ConfigManager;
@@ -24,7 +25,7 @@ public class ArenaSelector extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return Colors.translate(ConfigManager.config.getString("ArenaSelector.arenaSelectorTitle"));
+        return Colors.translate(ConfigLoader.arenaSelectorTitle);
     }
 
     @Override
@@ -35,7 +36,7 @@ public class ArenaSelector extends PaginatedMenu {
     @Override
     public void handleMenu(InventoryClickEvent e) {
         ItemStack item = e.getCurrentItem();
-        Material mat = Material.matchMaterial(ConfigManager.config.getString("ArenaSelector.arenaItem").toUpperCase());
+        Material mat = Material.matchMaterial(ConfigLoader.arenaItem.toUpperCase());
         if(item.getType() == mat) {
             Arena arenaClicked = new ArenaManager().getArenaByString(ChatColor.stripColor(item.getItemMeta().getDisplayName()));
             e.getView().close();
@@ -51,7 +52,7 @@ public class ArenaSelector extends PaginatedMenu {
                 index = getMaxItemsPerPage() * page + i;
                 if(index >= new ArenaManager().STATICARENAS.size()) break;
                 if (new ArenaManager().STATICARENAS.get(index) != null){
-                    ItemStack playerItem = new ItemStack(Material.matchMaterial(ConfigManager.config.getString("ArenaSelector.arenaItem").toUpperCase()), 1);
+                    ItemStack playerItem = new ItemStack(Material.matchMaterial(ConfigLoader.arenaItem.toUpperCase()), 1);
                     ItemMeta playerMeta = playerItem.getItemMeta();
                     playerMeta.setDisplayName(ChatColor.RED + new ArenaManager().STATICARENAS.get(index).arenaName);
                     ArrayList<String> jj = new ArrayList<>();
