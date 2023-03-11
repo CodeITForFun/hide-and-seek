@@ -43,6 +43,8 @@ public class ConfigLoader {
     public static List<String> messages;
     public static boolean random;
     public static String arenaItem;
+    public static String buildModeOn;
+    public static String buildModeOff;
 
     public ConfigLoader() {
         arenaLeave = ConfigManager.config.getString("Arena.LeaveArena");
@@ -82,5 +84,7 @@ public class ConfigLoader {
         connectedToDB = ConfigManager.config.getString("Database.Connected");
         arenaSelectorTitle = ConfigManager.config.getString("ArenaSelector.arenaSelectorTitle");
         arenaItem = ConfigManager.config.getString("ArenaSelector.arenaItem");
+        buildModeOn = ConfigManager.config.getString("Lobby.BuildMode.on");
+        buildModeOff = ConfigManager.config.getString("Lobby.BuildMode.off");
     }
 }
