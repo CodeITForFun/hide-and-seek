@@ -1,5 +1,6 @@
 package cz.ragy.hideandseek.listeners;
 
+import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.managers.ConfigLoader;
 import cz.ragy.hideandseek.managers.ConfigManager;
 import org.bukkit.Bukkit;
@@ -23,6 +24,8 @@ public class DmgBreak implements Listener {
     }
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        event.setCancelled(true);
+        if(!HideAndSeek.buildPlayers.contains(event.getPlayer().getUniqueId())) {
+            event.setCancelled(true);
+        }
     }
 }

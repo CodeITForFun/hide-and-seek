@@ -27,7 +27,7 @@ public class Build extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if(args.length == 2) {
+        if(args.length == 2) {      
             if(!(player.hasPermission("has.build") || player.hasPermission("has.*"))) return;
             Player playerArg = Bukkit.getPlayer(args[1]);
             if(HideAndSeek.buildPlayers.contains(playerArg.getUniqueId())) {
