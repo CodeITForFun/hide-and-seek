@@ -84,7 +84,7 @@ public class ConfigLoader {
         connectedToDB = ConfigManager.config.getString("Database.Connected");
         arenaSelectorTitle = ConfigManager.config.getString("ArenaSelector.arenaSelectorTitle");
         arenaItem = ConfigManager.config.getString("ArenaSelector.arenaItem");
-        buildModeOn = ConfigManager.config.getString("Lobby.BuildMode.on");
-        buildModeOff = ConfigManager.config.getString("Lobby.BuildMode.off");
+        buildModeOn = ConfigManager.config.getString("Lobby.BuildModeOn");
+        buildModeOff = ConfigManager.config.getString("Lobby.BuildModeOff");
     }
 }

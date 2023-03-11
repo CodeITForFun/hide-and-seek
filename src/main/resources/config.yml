@@ -26,9 +26,8 @@ Lobby:
   onJoinLobby: true
   onJoinMessage: "Player %player% joined!" #Use %player% for player's nickname
   Success: "&aLobby has been successfully set!"
-  BuildMode:
-    on: "&aYou turned on build mode!"
-    off: "&cYou turned off build mode!"
+  BuildModeOn: "&aYou turned on build mode!"
+  BuildModeOff: "&cYou turned off build mode!"
   LobbyLocation: #You can edit lobby location
     ==: org.bukkit.Location
     world: world
