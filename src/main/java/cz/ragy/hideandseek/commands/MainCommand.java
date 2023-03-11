@@ -2,27 +2,18 @@ package cz.ragy.hideandseek.commands;
 
 import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.commands.subcommands.*;
-import cz.ragy.hideandseek.game.Arena;
-import cz.ragy.hideandseek.managers.ArenaManager;
 import cz.ragy.hideandseek.managers.ConfigManager;
-import cz.ragy.hideandseek.managers.GameManager;
-import cz.ragy.hideandseek.managers.MessageManager;
-import cz.ragy.hideandseek.menusystem.menus.EditMenu;
 import cz.ragy.hideandseek.utilities.Colors;
-import cz.ragy.hideandseek.utilities.Digit;
 import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

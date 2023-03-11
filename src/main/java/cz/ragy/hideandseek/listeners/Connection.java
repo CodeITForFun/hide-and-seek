@@ -1,15 +1,8 @@
 package cz.ragy.hideandseek.listeners;
 
-import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.managers.ConfigManager;
-import cz.ragy.hideandseek.managers.MessageManager;
 import cz.ragy.hideandseek.utilities.Colors;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,9 +10,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Connection implements Listener {

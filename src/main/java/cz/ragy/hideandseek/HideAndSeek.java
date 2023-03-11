@@ -18,7 +18,6 @@ public final class HideAndSeek extends JavaPlugin {
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
     public List<UUID> buildPlayers = new ArrayList<>();
     public static HideAndSeek instance;
-    public FallingBlock fallingBlock;
     @Override
     public void onEnable() {
         instance = this;

@@ -1,6 +1,5 @@
 package cz.ragy.hideandseek.managers;
 
-import cz.ragy.hideandseek.HideAndSeek;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

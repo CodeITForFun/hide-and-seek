@@ -1,13 +1,11 @@
 package cz.ragy.hideandseek.managers;
 
-import com.sun.org.apache.xerces.internal.xs.StringList;
 import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.HideAndSeek;
 import cz.ragy.hideandseek.utilities.Colors;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;

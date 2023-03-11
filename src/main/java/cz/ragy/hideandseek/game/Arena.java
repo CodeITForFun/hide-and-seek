@@ -2,9 +2,7 @@ package cz.ragy.hideandseek.game;
 
 import fr.mrmicky.fastboard.FastBoard;
 import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 
 import java.util.*;

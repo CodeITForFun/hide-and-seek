@@ -1,8 +1,6 @@
 package cz.ragy.hideandseek.managers;
 
 import cz.ragy.hideandseek.database.MysqlManager;
-import cz.ragy.hideandseek.managers.ConfigManager;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

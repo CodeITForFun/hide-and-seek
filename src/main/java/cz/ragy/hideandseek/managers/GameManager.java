@@ -4,14 +4,10 @@ import cz.ragy.hideandseek.game.Arena;
 import cz.ragy.hideandseek.utilities.Colors;
 import fr.mrmicky.fastboard.FastBoard;
 import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.*;
 
 public class GameManager {
 
